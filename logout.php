@@ -13,8 +13,8 @@
     <title>Login</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
 
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 
     <style>
         .bd-placeholder-img {
@@ -43,6 +43,8 @@
 
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column" >
         <?php include 'nav_bar.html';?>
+
+        <?= 'Seja bem vindo(a), '. $_SESSION['user']. '!' ?>
 
         <main class="form-signin px-3">
             <form method="post" action="validacao_login.php">

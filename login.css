@@ -1,5 +1,7 @@
 body {
-    background-image: url(img/pata_fundo.png);
+    background-image: url("img/matilha_opaco.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .form-signin {
