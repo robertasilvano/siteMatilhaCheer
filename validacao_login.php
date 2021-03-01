@@ -8,7 +8,7 @@
             $_SESSION['password'] = $_POST['password'];
             $_SESSION['logado'] = true;
 
-            echo "<script> location.href = 'logout.php' </script>";
+            echo "<script> location.href = 'atletas.php' </script>";
         }
 
         else {

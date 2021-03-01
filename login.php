@@ -46,37 +46,35 @@
         <?php include 'nav_bar.html';?>
       </header>
 
-      <main class="text-center">
-
-        <?php include 'validacao_logado.php';?>
-        <div class="row">
-            <div class="container-login">
-                <form method="post" action="validacao_login.php">
-                    <h1 class="h3 mb-3 fw-bold">5, 6, 7, 8!</h1>
-                    <label for="user" class="visually-hidden">Username</label>
-                    <input type="text" id="user" name="user" class="form-control" placeholder="Username"  required autofocus>
-                    <label for="password" class="visually-hidden">Password</label>
-                    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
-                    <br>
-                    <button class="w-100 btn btn-outline-warning" type="submit" name='login'>Login</button>
-                </form>
-            
-            
-                <?php 
-                    if (isset($_SESSION['user'])) {
-                        if ($_SESSION['user'] == '' && $_SESSION['password'] == 'password_invalido') {
-                            echo "<br><div class='alert alert-warning'> senha inválida! </div>";
-                        }
-                        else if ($_SESSION['user'] == 'login_invalido' || $_SESSION['password'] == 'password_invalido') {
-                            echo "<br><div class='alert alert-warning'> user inválido! </div>";
-                        }
-                    }
-                ?>
-
+        <main class="text-center">
+            <?php include 'validacao_logado_login.php';?>
+                    <div class="row">
+                        <div class="container-login">
+                            <form method="post" action="validacao_login.php">
+                                <h1 class="h3 mb-3 fw-bold">5, 6, 7, 8!</h1>
+                                <label for="user" class="visually-hidden">Username</label>
+                                <input type="text" id="user" name="user" class="form-control" placeholder="Username"  required autofocus>
+                                <label for="password" class="visually-hidden">Password</label>
+                                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+                                <br>
+                                <button class="w-100 btn btn-outline-warning" type="submit" name='login'>Login</button>
+                            </form>
+                        
+                        
+                            <?php 
+                                if (isset($_SESSION['user'])) {
+                                    if ($_SESSION['user'] == '' && $_SESSION['password'] == 'password_invalido') {
+                                        echo "<br><div class='alert alert-warning'> senha inválida! </div>";
+                                    }
+                                    else if ($_SESSION['user'] == 'login_invalido' || $_SESSION['password'] == 'password_invalido') {
+                                        echo "<br><div class='alert alert-warning'> user inválido! </div>";
+                                    }
+                                }
+                            ?>
+                        </div>
+                    </div>
             </div>
-
-        </div>
-      </main>
+        </main>
 
     </div>
 

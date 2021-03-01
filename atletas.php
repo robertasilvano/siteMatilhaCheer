@@ -1,3 +1,7 @@
+<?php 
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br" class="h-100">
 <head>
@@ -31,7 +35,7 @@
     <!-- Custom styles for this template -->
     <link href="base.css" rel="stylesheet">
     <link href="nav_bar.css" rel="stylesheet">
-    <link href="listagem.css" rel="stylesheet">
+    <link href="atletas.css" rel="stylesheet">
 </head>
 
 
@@ -43,29 +47,44 @@
       </header>
 
       <main class="text-center">
-        <div class="row">
-          <div class="col-lg-4">
-            <img class="imagens" src="img/lista2.png">
-            <h2>Faltas</h2>
-            <p class="a">Aqui você irá avisar quando tiver que faltar o treino e a justificativa. 😡</p>
-            <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
+        <?php include 'validacao_logado_atletas.php';?>
+          <div class="row justify-content-center">
+            <?= '<h2>Seja bem vindo(a), '. $_SESSION['user']. '!</h2>' ?>
+          </div>
+          <br>
+          <br>
+          <div class="row">
+            <div class="col-lg-4">
+              <img class="imagens" src="img/lista2.png">
+              <h2>Faltas</h2>
+              <p class="a">Aqui você irá avisar quando tiver que faltar o treino e a justificativa. 😡</p>
+              <p><a class="btn btn-outline-warning" href="#">Go &raquo;</a></p>
+            </div>
+
+            <div class="col-lg-4">
+              <img class="imagens" src="img/lista1.png">
+              <h2>Diretoria</h2>
+              <p class="a">Aqui a diretoria tem acesso as pautas. 📣</p>
+              <p><a class="btn btn-outline-warning" href="#">Go &raquo;</a></p>
+            </div>
+
+            <div class="col-lg-4">
+              <img class="imagens" src="img/lista3.png">
+              <h2>Financeiro</h2>
+              <p class="a">Aqui você poderá consultar sua situação na tesouraria. 💸</p>
+              <p><a class="btn btn-outline-warning" href="#">Go &raquo;</a></p>
+            </div>
           </div>
 
-          <div class="col-lg-4">
-            <img class="imagens" src="img/lista1.png">
-            <h2>Diretoria</h2>
-            <p class="a">Aqui a diretoria tem acesso as pautas. 📣</p>
-            <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
+          <div class="row">
+            <div class="container-logout">
+              <br><br>
+              <form method="post" action="validacao_login.php">
+                <button class="w-100 btn btn-outline-warning" type="submit" name='logout'>logout</button>
+              </form>
+            </div>
           </div>
-
-          <div class="col-lg-4">
-            <img class="imagens" src="img/lista3.png">
-            <h2>Financeiro</h2>
-            <p class="a">Aqui você poderá consultar sua situação na tesouraria. 💸</p>
-            <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-          </div>
-        </div>
-      </main>
+       </main>
     </div>
 
 </body>

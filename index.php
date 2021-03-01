@@ -46,10 +46,10 @@
       </header>
 
       <main class="text-center">
-        <div class="row">
-          <h1>Matilha Cheer.</h1>
-          <p class="lead">Olá, cheerleader! Nós somos o time da UFSC Campus Araranguá. Por aqui você pode conhecer mais sobre o esporte e sobre nosso time. Além disso, se você for nosso atleta, acessa a página de login para poder ver algumas funcionalidades exclusivas. 🌟🤸‍♂️</p>
-        </div>
+          <div class="row">
+            <h1>Matilha Cheer.</h1>
+            <p class="lead">Olá, cheerleader! Nós somos o time da UFSC Campus Araranguá. Por aqui você pode conhecer mais sobre o esporte e sobre nosso time. Além disso, se você for nosso atleta, acessa a página de login para poder ver algumas funcionalidades exclusivas. 🌟🤸‍♂️</p>
+          </div>
       </main>
 
         <footer class="text-center">

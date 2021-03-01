@@ -4,12 +4,12 @@ body {
     padding-top: 70px;
 }
 
-.row {
-  padding-top: 15%;
-  padding-right: 8%;
-  padding-left: 8%;
-}
-
 footer {
   padding-top: 15%;
+}
+
+main {
+  padding-top: 10%;
+  padding-right: 8%;
+  padding-left: 8%;
 }

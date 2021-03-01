@@ -1,0 +1,15 @@
+body {
+    background-image: url("img/pata_fundo2.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.imagens {
+    border-radius: 50%;
+    width: 140px;
+}
+
+.container-logout {
+    padding-left: 30%;
+    padding-right: 30%;
+  }

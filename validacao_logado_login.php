@@ -2,7 +2,7 @@
 
     if (isset($_SESSION['logado'])) {
         if ($_SESSION['logado'] == true) {
-            echo "<script> location.href = 'logout.php' </script>";
+            echo "<script> location.href = 'atletas.php' </script>";
         }
     }
 
