@@ -4,6 +4,11 @@ body {
     background-repeat: no-repeat;
 }
 
+.container-login {
+  padding-left: 30%;
+  padding-right: 30%;
+}
+
 .form-signin {
     width: 100%;
     max-width: 330px;

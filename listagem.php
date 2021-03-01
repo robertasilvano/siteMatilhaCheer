@@ -34,38 +34,39 @@
     <link href="listagem.css" rel="stylesheet">
 </head>
 
-<body class="d-flex h-100 text-center text-white bg-dark flex-column">
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+
+
+<body>
+    <div class="container-fluid h-100">
+      <header>
         <?php include 'nav_bar.html';?>
+      </header>
 
-        <main class="px-3">
-          <div class="container">
-            <div class="row">
-
-              <div class="col-lg-4">
-                <img class="imagens" src="img/lista2.png">
-                <h2>Faltas</h2>
-                <p class="a">Aqui você irá avisar quando tiver que faltar o treino e a justificativa. 😡</p>
-                <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-              </div>
-
-              <div class="col-lg-4">
-                <img class="imagens" src="img/lista1.png">
-                <h2>Diretoria</h2>
-                <p class="a">Aqui a diretoria tem acesso as pautas. 📣</p>
-                <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-              </div>
-
-              <div class="col-lg-4">
-                <img class="imagens" src="img/lista3.png">
-                <h2>Financeiro</h2>
-                <p class="a">Aqui você poderá consultar sua situação na tesouraria. 💸</p>
-                <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-              </div>
-            </div>
+      <main class="text-center">
+        <div class="row">
+          <div class="col-lg-4">
+            <img class="imagens" src="img/lista2.png">
+            <h2>Faltas</h2>
+            <p class="a">Aqui você irá avisar quando tiver que faltar o treino e a justificativa. 😡</p>
+            <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
           </div>
-        </main>        
-    </div>
-</body>
 
+          <div class="col-lg-4">
+            <img class="imagens" src="img/lista1.png">
+            <h2>Diretoria</h2>
+            <p class="a">Aqui a diretoria tem acesso as pautas. 📣</p>
+            <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
+          </div>
+
+          <div class="col-lg-4">
+            <img class="imagens" src="img/lista3.png">
+            <h2>Financeiro</h2>
+            <p class="a">Aqui você poderá consultar sua situação na tesouraria. 💸</p>
+            <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
+          </div>
+        </div>
+      </main>
+    </div>
+
+</body>
 </html>
