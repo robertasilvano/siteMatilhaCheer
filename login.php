@@ -13,6 +13,7 @@
     <title>Login</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
 
+    <!-- BOOTSTRAP -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 
@@ -33,7 +34,7 @@
     </style>
 
 
-    <!-- Custom styles for this template -->
+    <!-- STYLES -->
     <link href="base.css" rel="stylesheet">
     <link href="nav_bar.css" rel="stylesheet">
     <link href="login.css" rel="stylesheet">
@@ -47,6 +48,8 @@
       </header>
 
         <main class="text-center">
+
+            <!-- verifica se já está logado. se sim, vai direto pra página de atletas. se não, aparece o formulário de login. -->
             <?php include 'validacao_logado_login.php';?>
                     <div class="row">
                         <div class="container-login">
@@ -60,7 +63,7 @@
                                 <button class="w-100 btn btn-outline-warning" type="submit" name='login'>Login</button>
                             </form>
                         
-                        
+                            <!-- se a SESSION já estiver setada, significa que já foi tentado realizar login, e então da um alert de qual foi o erro. -->
                             <?php 
                                 if (isset($_SESSION['user'])) {
                                     if ($_SESSION['user'] == '' && $_SESSION['password'] == 'password_invalido') {
@@ -68,6 +71,9 @@
                                     }
                                     else if ($_SESSION['user'] == 'login_invalido' || $_SESSION['password'] == 'password_invalido') {
                                         echo "<br><div class='alert alert-warning'> user inválido! </div>";
+                                    }
+                                    else {
+                                        echo "<br><div class='alert alert-warning'> erro ao fazer login! </div>";
                                     }
                                 }
                             ?>

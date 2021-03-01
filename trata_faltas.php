@@ -45,9 +45,11 @@
       </header>
 
       <main class="text-center">
+        <!-- só tem acesso a essa página quem é atleta, então verifica se já está logado. se não, vai pra página de login -->
          <?php include 'validacao_logado_atletas.php';?>
           <div class="row justify-content-center">
                 <?php
+                    // printa o que foi inserido pelo usuário no formulário da página 'faltas.php'
                     echo '<h3> Você inseriu uma falta no dia '. $_POST['data']. ' com a justificativa '. $_POST['justificativa']. '!</h3>'
 
                 ?>

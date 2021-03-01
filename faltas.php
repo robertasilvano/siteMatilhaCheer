@@ -13,6 +13,7 @@
     <title>Matilha Cheer</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/cover/">
 
+    <!-- BOOTSTRAP -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 
@@ -32,7 +33,7 @@
       }
     </style>
 
-    <!-- Custom styles for this template -->
+    <!-- STYLES -->
     <link href="base.css" rel="stylesheet">
     <link href="nav_bar.css" rel="stylesheet">
     <link href="faltas.css" rel="stylesheet">
@@ -45,9 +46,14 @@
       </header>
 
       <main class="text-center">
+
+        <!-- só tem acesso a essa página quem é atleta, então é necessário fazer a validação. Se não estiver logado, vai pra página de login. -->
         <?php include 'validacao_logado_atletas.php';?>
+
           <div class="row justify-content-center">
             <div class="container-faltas">
+
+                <!-- formulário para inserir as infos necessárias -->
                 <form method="post" action="trata_faltas.php">
                     <h1 class="h3 mb-3 fw-bold">Insira sua falta aqui 😥</h1>
                     <br>
@@ -59,6 +65,7 @@
                     <br>
                     <button class="w-100 btn btn-outline-warning" type="submit" name='ok'>Ok</button>
                 </form>
+                
             </div>
           </div>
        </main>
