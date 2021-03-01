@@ -1,4 +1,6 @@
-<!-- fazer comentários -->
+<?php 
+    session_start();
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br" class="h-100">
@@ -33,7 +35,7 @@
     <!-- Custom styles for this template -->
     <link href="base.css" rel="stylesheet">
     <link href="nav_bar.css" rel="stylesheet">
-    <link href="index.css" rel="stylesheet">
+    <link href="faltas.css" rel="stylesheet">
 </head>
 
 <body>
@@ -43,20 +45,15 @@
       </header>
 
       <main class="text-center">
-          <div class="row">
-            <h1>Matilha Cheer.</h1>
-            <p class="lead">Olá, cheerleader! Nós somos o time da UFSC Campus Araranguá. Por aqui você pode conhecer mais sobre o esporte e sobre nosso time. Além disso, se você for nosso atleta, acessa a página de login para poder ver algumas funcionalidades exclusivas. 🌟🤸‍♂️</p>
-          </div>
-      </main>
+         <?php include 'validacao_logado_atletas.php';?>
+          <div class="row justify-content-center">
+                <?php
+                    echo '<h3> Você inseriu uma falta no dia '. $_POST['data']. ' com a justificativa '. $_POST['justificativa']. '!</h3>'
 
-        <footer class="text-center">
-          <p><a href="sobre_esporte.php" class="cheer">Sobre o esporte</a></p>
-        </footer>
+                ?>
+          </div>
+       </main>
     </div>
 
 </body>
-
 </html>
-
-
-

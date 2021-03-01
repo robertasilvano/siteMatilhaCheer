@@ -1,4 +1,6 @@
-<!-- fazer comentários -->
+<?php 
+    session_start();
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br" class="h-100">
@@ -33,7 +35,7 @@
     <!-- Custom styles for this template -->
     <link href="base.css" rel="stylesheet">
     <link href="nav_bar.css" rel="stylesheet">
-    <link href="index.css" rel="stylesheet">
+    <link href="faltas.css" rel="stylesheet">
 </head>
 
 <body>
@@ -43,20 +45,24 @@
       </header>
 
       <main class="text-center">
-          <div class="row">
-            <h1>Matilha Cheer.</h1>
-            <p class="lead">Olá, cheerleader! Nós somos o time da UFSC Campus Araranguá. Por aqui você pode conhecer mais sobre o esporte e sobre nosso time. Além disso, se você for nosso atleta, acessa a página de login para poder ver algumas funcionalidades exclusivas. 🌟🤸‍♂️</p>
+        <?php include 'validacao_logado_atletas.php';?>
+          <div class="row justify-content-center">
+            <div class="container-faltas">
+                <form method="post" action="trata_faltas.php">
+                    <h1 class="h3 mb-3 fw-bold">Insira sua falta aqui 😥</h1>
+                    <br>
+                    <label for="justificativa" class="visually-hidden">Justificativa</label>
+                    <input type="text" id="justificativa" name="justificativa" class="form-control" placeholder="Justificativa" required autofocus>
+                    
+                    <label for="data" class="visually-hidden">Data da falta</label>
+                    <input type="date" id="data" name="data" class="form-control" placeholder="Data" required>
+                    <br>
+                    <button class="w-100 btn btn-outline-warning" type="submit" name='ok'>Ok</button>
+                </form>
+            </div>
           </div>
-      </main>
-
-        <footer class="text-center">
-          <p><a href="sobre_esporte.php" class="cheer">Sobre o esporte</a></p>
-        </footer>
+       </main>
     </div>
 
 </body>
-
 </html>
-
-
-

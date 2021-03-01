@@ -58,7 +58,7 @@
               <img class="imagens" src="img/lista2.png">
               <h2>Faltas</h2>
               <p class="a">Aqui você irá avisar quando tiver que faltar o treino e a justificativa. 😡</p>
-              <p><a class="btn btn-outline-warning" href="#">Go &raquo;</a></p>
+              <p><a class="btn btn-outline-warning" href="faltas.php">Go &raquo;</a></p>
             </div>
 
             <div class="col-lg-4">
@@ -78,7 +78,7 @@
 
           <div class="row">
             <div class="container-logout">
-              <br><br>
+              <br>
               <form method="post" action="validacao_login.php">
                 <button class="w-100 btn btn-outline-warning" type="submit" name='logout'>logout</button>
               </form>

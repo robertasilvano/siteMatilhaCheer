@@ -2,7 +2,7 @@
     session_start();
 
     if (isset($_POST['user'])) {
-        if ($_POST['user'] == 'robs' && $_POST['password'] == 'a') {
+        if ($_POST['user'] == 'roberta' && $_POST['password'] == '123') {
 
             $_SESSION['user'] = $_POST['user'];
             $_SESSION['password'] = $_POST['password'];
@@ -12,15 +12,15 @@
         }
 
         else {
-            if ($_POST['user'] != 'robs' && $_POST['password'] != 'a'){
+            if ($_POST['user'] != 'roberta' && $_POST['password'] != '123'){
                 $_SESSION['user'] = 'login_invalido';
                 $_SESSION['password'] = 'password_invalido';
             }
-            else if ($_POST['user'] != 'robs') {
+            else if ($_POST['user'] != 'roberta') {
                 $_SESSION['user'] = 'login_invalido';
                 $_SESSION['password'] = '';
             }
-            else if ($_POST['password'] != 'a') {
+            else if ($_POST['password'] != '123') {
                 $_SESSION['user'] = '';
                 $_SESSION['password'] = 'password_invalido';
             }
