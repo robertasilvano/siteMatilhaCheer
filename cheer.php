@@ -1,8 +1,3 @@
-<!-- ver o role do aria-current no menu-->
-<!-- fazer comentários -->
-<!-- ver o container q n ta no meio da página -->
-<!-- add as refs -->
-
 <!DOCTYPE html>
 <html lang="pt-br" class="h-100">
 <head>
@@ -47,12 +42,12 @@
 
       <main class="text-center">
         <div class="row">
-          <h1>Matilha Cheer.</h1>
-          <p class="lead">Olá, cheerleader! Nós somos o time da UFSC Campus Araranguá. Por aqui você pode conhecer mais sobre o esporte e sobre nosso time. Além disso, se você for nosso atleta, acessa a página de login para poder ver algumas funcionalidades exclusivas. 🌟🤸‍♂️</p>
+          <h1>Sobre o esporte</h1>
+          <p class="lead">Olá! Essa página está em construção e no futuro vai explicar mais sobre o esporte e a matilha 🥰</p>
         </div>
 
         <footer>
-          <p><a href="cheer.php" class="cheer">Sobre o esporte</a></p>
+          <p><a href="index.php" class="cheer">Voltar</a></p>
         </footer>
       </main>
 
