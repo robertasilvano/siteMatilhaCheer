@@ -39,22 +39,33 @@
     <link href="index.css" rel="stylesheet">
 </head>
 
-<body class="d-flex h-100 text-center text-white bg-dark flex-column">
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column" >
+<body>
+    <div class="container-fluid h-100">
+      <header>
         <?php include 'nav_bar.html';?>
+      </header>
 
-        <main class="px-3">
-            <h1>Matilha Cheer.</h1>
-            <p class="lead">Texto explicando o que é a matilha.</p>
-            <p class="lead">
+      <main class="text-center">
+        <div class="row">
+          <h1>Matilha Cheer.</h1>
+          <p class="lead">Texto explicando o que é a matilha.</p>
+          <p class="lead">
               <a href="#" class="btn btn-lg btn-secondary fw-bold border-white bg-white">?</a>
-            </p>
-        </main>
+          </p>
+        </div>
 
-        <footer class="mt-auto text-white-50">
-            <p><a href="#" class="refs">Referências</a></p>
+        <footer>
+          <p><a href="#" class="refs">Referências</a></p>
         </footer>
+      </main>
+
+
+
     </div>
+
 </body>
 
 </html>
+
+
+
