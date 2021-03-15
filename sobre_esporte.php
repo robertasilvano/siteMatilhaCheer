@@ -33,23 +33,52 @@
     <link href="base.css" rel="stylesheet">
     <link href="nav_bar.css" rel="stylesheet">
     <link href="index.css" rel="stylesheet">
+    <link href="sobre_esporte.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="container-fluid h-100">
+    <div class="container-fluid">
       <header>
         <?php include 'nav_bar.html';?>
       </header>
 
-      <main class="text-center">
-        <div class="row">
-          <h1>Sobre o esporte</h1>
-          <p class="lead">Olá! Essa página está em construção e no futuro vai explicar mais sobre o esporte e a matilha 🥰</p>
+      <main>
+        <div class="row featurette">
+          <div class="col-md-6 order-md-2">
+            <h2 class="featurette-heading">Cheerleading<br><span class="text-muted">o que é?</span></h2><br>
+            <p class="featurette-text">O <strong>esporte</strong> chegou ao Brasil em 2008, e é composto pelos seguintes quadros:
+              <ul style="list-style-type:square">
+                <li>Stunts - levantamento de pessoas</li>
+                <li>Baskets - lançamento de pessoas</li>
+                <li>Pirâmides - stunts conectados</li>
+                <li>Tumbling - acrobacias de ginástica no solo</li>
+                <li>Jumps - saltos caracteristicos</li>
+                <li>Flex - posições corporais de alongamento</li>
+                <li>Dance - uma dança específica e marcada</li>
+              </ul>
+            </p>
+          </div>
+          <div class="col-md-5 order-md-1 d-flex justify-content-center">
+            <img class="imagens" src="img/piramide.png" height="350">
+          </div>
         </div>
 
-        <footer>
-          <p><a href="index.php" class="cheer">Voltar</a></p>
-        </footer>
+        <hr class="featurette-divider">
+
+        <div class="row featurette text-center">
+          <div class="col-md-6 order-md-1">
+            <h2 class="featurette-heading">Matilha<br><span class="text-muted">o que é?</span></h2><br>
+            <p class="featurette-text">Nascida em 2018, a matilha é o time de cheerleading da UFSC Campus Araranguá! O time tem como objetivo a evolução de seus atletas e a divulgação do esporte.
+            </p>
+          </div>
+          <div class="col-md-5 order-md-2 d-flex justify-content-center">
+            <img class="imagens" src="img/matilha2.png" height="350">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+        <br>
+
       </main>
 
 

@@ -1,0 +1,33 @@
+.featurette-heading {
+    color: white;
+    line-height: 1;
+    font-weight: 350;
+    text-align: center;
+    font-size: 50px;
+}
+
+.featurette-text {
+    color: white;
+    line-height: 1;
+    font-weight: 350;
+    text-align: center;
+    font-size: 18px;
+}
+
+.imagens {
+    border-radius: 3%;
+}
+
+.col-md-6{
+    float: none;
+    margin: auto;
+}
+
+.col-md-5{
+    float: none;
+    margin: auto;
+}
+
+.featurette-divider {
+    margin: 5rem 0; /* Space out the Bootstrap <hr> more */
+  }
