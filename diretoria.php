@@ -52,45 +52,22 @@
         <!-- só tem acesso a essa página quem é atleta, então é necessário fazer a validação. Se não estiver logado, vai pra página de login. -->
         <?php include 'validacao_logado_atletas.php';?>
 
-          <div class="row justify-content-center">
-            <?= '<h2>Seja bem vindo(a), '. $_SESSION['user']. '!</h2>' ?>
-          </div>
-          <br>
-          <br>
-
           <!-- listagem das funcionalidades do sistema -->
           <div class="row">
-            <div class="col-lg-4">
-              <img class="imagens" src="img/lista2.png">
-              <h2>Faltas</h2>
-              <p class="a">Aqui você irá avisar quando tiver que faltar o treino e a justificativa. 😡</p>
-              <p><a class="btn btn-outline-warning" href="faltas.php">Go &raquo;</a></p>
+            <div class="col-lg-6">
+              <img class="imagens" src="img/cadastro2.png">
+              <h2>Cadastro de atletas</h2>
+              <p class="a">Aqui você poderá adicionar, alterar e remover atletas. 👀</p>
+              <p><a class="btn btn-outline-warning" href="cadastro.php">Go &raquo;</a></p>
             </div>
 
-            <div class="col-lg-4">
-              <img class="imagens" src="img/lista1.png">
-              <h2>Diretoria</h2>
-              <p class="a">Aqui a diretoria tem acesso as funcionalidades exclusivas. 📣</p>
-              <p><a class="btn btn-outline-warning" href="diretoria.php">Go &raquo;</a></p>
-            </div>
-
-            <div class="col-lg-4">
-              <img class="imagens" src="img/lista3.png">
-              <h2>Financeiro</h2>
-              <p class="a">Aqui você poderá consultar sua situação na tesouraria. 💸</p>
+            <div class="col-lg-6">
+              <img class="imagens" src="img/pautas.png">
+              <h2>Pautas</h2>
+              <p class="a">Aqui a diretoria tem acesso as pautas. 📣</p>
               <p><a class="btn btn-outline-warning" href="#">Go &raquo;</a></p>
             </div>
-          </div>
 
-          <!-- botão pra fazer logout, que a ação destrói a sessão  -->
-          <div class="row">
-            <div class="container-logout">
-              <br>
-              <form method="post" action="validacao_login.php">
-                <button class="w-100 btn btn-outline-warning" type="submit" name='logout'>logout</button>
-              </form>
-            </div>
-          </div>
        </main>
     </div>
 
