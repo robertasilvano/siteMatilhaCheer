@@ -22,3 +22,19 @@ body {
 .form-control:focus {
     z-index: 2;
 }
+
+.col-md-6{
+    float: none;
+    margin: auto;
+}
+
+.form-cadastro input[type="checkbox"] {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.container-tabela {
+    margin-top: 50px;
+    margin-bottom: 40px;
+    overflow-x: auto;
+}
