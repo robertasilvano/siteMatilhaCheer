@@ -1,5 +1,7 @@
 <?php 
     session_start();
+    require_once("classe_atleta.php");
+    $a = new Atleta("avii_desenvweb", "localhost", "root", "");
 ?>
 
 <!DOCTYPE html>
@@ -52,34 +54,10 @@
         <!-- só tem acesso a essa página quem é atleta, então é necessário fazer a validação. Se não estiver logado, vai pra página de login. -->
         <?php 
             include 'validacao_logado_atletas.php';
-
-            try {
-                $pdo = new PDO("mysql:dbname=avii_desenvweb;host=localhost;", "root", "");
-            }
-            catch (PDOException $e) {
-                echo "Erro com o banco de dados: ".$e->getMessage();
-            }
-            catch (Exception $e) {
-                echo "Erro genérico: ".$e->getMessage();
-            }
-
-            $res = $pdo->prepare("INSERT INTO ATLETAS(nome, user, pass, nascimento, telefone, convenio, tipo_sangue, cpf, diretoria) VALUES (:nome, :user, :pass, :nascimento, :telefone, :convenio, :tipo_sangue, :cpf, :diretoria)");
-
-            $res->bindValue(":nome", "Roberta Silvano");
-            $res->bindValue(":user", "robs");
-            $res->bindValue(":pass", "111");
-            $res->bindValue(":nascimento", "1996-07-01");
-            $res->bindValue(":telefone", "111");
-            $res->bindValue(":convenio", "SC");
-            $res->bindValue(":tipo_sangue", "O+");
-            $res->bindValue(":cpf", "111");
-            $res->bindValue(":diretoria", "1");
-            $res->execute();
-
         ?>
             <div class="row">
                 <div class="container-cadastro">
-                    <form  method="post" action="" class="form-cadastro">
+                    <form  method="post" action="validacao_cadastro.php" class="form-cadastro">
                         <h1 class="h3 mb-3 fw-bold">Cadastrar atleta</h1>
                         <div class="row">
                             <div class="col-md-6">
@@ -126,10 +104,18 @@
             </div>
 
             <hr>
-            
+
             <div class="row">
                 <div class="container-tabela">
                 <h1 class="h3 mb-3 fw-bold">Atletas cadastrados</h1>
+                    <?php 
+                        $select = $a->select();
+                        echo "<pre>";
+                        var_dump($select);    
+                        echo "</pre>";             
+                    ?>
+
+
                     <table class="table table-striped table-warning table-bordered table-hover">
                         <thead>
                             <tr>
