@@ -28,7 +28,7 @@ class Atleta {
             // Fazer a conexão com o BD na classe ConexaoPDO
             //$conexao = ;
             // Consulta ao banco com parâmetros de usuario e senha
-            $logar = $this->conn->conectar()->prepare("SELECT id, user, pass FROM atletas WHERE user = :user AND pass = :pass");
+            $logar = $this->conn->conectar()->prepare("SELECT id, user, pass, diretoria FROM atletas WHERE user = :user AND pass = :pass");
             
             // Troca dos parametros para evitar SQL Injection
             $logar->bindParam("user", $this->user, PDO::PARAM_STR);
@@ -44,6 +44,7 @@ class Atleta {
                 $_SESSION['logado'] = True;
                 $resultado = $logar->fetch(PDO::FETCH_ASSOC);
                 $_SESSION['user'] = $resultado['user'];
+                $_SESSION['diretoria'] = $resultado['diretoria'];
                 include("validacao_logado_login.php");
             } else {
                 header("location: login.php?error=true");
