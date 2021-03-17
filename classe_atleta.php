@@ -19,6 +19,46 @@ class Atleta {
         $this->conn = new ConexaoPDO();
     }
 
+    public function logar($campos) {
+
+        $this->user = $campos['user'];
+        $this->pass = $campos['password'];
+        
+        try {
+            // Fazer a conexão com o BD na classe ConexaoPDO
+            //$conexao = ;
+            // Consulta ao banco com parâmetros de usuario e senha
+            $logar = $this->conn->conectar()->prepare("SELECT id, user, pass FROM atletas WHERE user = :user AND pass = :pass");
+            
+            // Troca dos parametros para evitar SQL Injection
+            $logar->bindParam("user", $this->user, PDO::PARAM_STR);
+            $logar->bindParam("pass", $this->pass, PDO::PARAM_STR);
+            
+            // Execução da consulta
+            $logar->execute();
+            
+            // Verificação do resultado da consulta
+            // > 0 -> usuario e senha corretos
+            if($logar->rowCount() > 0) {
+                session_start();
+                $_SESSION['logado'] = True;
+                $resultado = $logar->fetch(PDO::FETCH_ASSOC);
+                $_SESSION['user'] = $resultado['user'];
+                include("validacao_logado_login.php");
+            } else {
+                header("location: login.php?error=true");
+            }
+            
+        } catch(PDOException $e) {
+        
+            echo "Conexão falhou: " . $e->getMessage();
+
+        }
+        
+    }
+
+
+
     public function select() {
         $select = $this->conn->conectar()->query("SELECT * FROM atletas");
         $select = $select->fetchAll(PDO::FETCH_ASSOC);

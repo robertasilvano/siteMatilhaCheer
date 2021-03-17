@@ -65,16 +65,8 @@
                         
                             <!-- se a SESSION já estiver setada, significa que já foi tentado realizar login, e então da um alert de qual foi o erro. -->
                             <?php 
-                                if (isset($_SESSION['user'])) {
-                                    if ($_SESSION['user'] == '' && $_SESSION['password'] == 'password_invalido') {
-                                        echo "<br><div class='alert alert-warning'> senha inválida! </div>";
-                                    }
-                                    else if ($_SESSION['user'] == 'login_invalido' || $_SESSION['password'] == 'password_invalido') {
-                                        echo "<br><div class='alert alert-warning'> user inválido! </div>";
-                                    }
-                                    else {
-                                        echo "<br><div class='alert alert-warning'> erro ao fazer login! </div>";
-                                    }
+                                if (isset($_GET['error'])) {
+                                    echo "<br><div class='alert alert-warning'> erro ao fazer login! </div>";
                                 }
                             ?>
                         </div>
