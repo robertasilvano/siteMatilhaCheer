@@ -1,8 +1,9 @@
-<?php 
-    session_start();
-    require_once("classe_atleta.php");
-    $a = new Atleta("avii_desenvweb", "localhost", "root", "");
+<?php
+
+session_start();
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-br" class="h-100">
@@ -61,42 +62,40 @@
                         <h1 class="h3 mb-3 fw-bold">Cadastrar atleta</h1>
                         <div class="row">
                             <div class="col-md-6">
-                                <label for="nome" class="visually-hidden">Nome</label>
-                                <input type="text" id="nome" name="nome" class="form-control" placeholder="Nome"  required autofocus>
-                                <label for="user" class="visually-hidden">Username</label>
-                                <input type="text" id="user" name="user" class="form-control" placeholder="Username" require>
-                                <label for="password" class="visually-hidden">Password</label>
-                                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
-                                <label for="nascimento" class="visually-hidden">Nascimento</label>
-                                <input type="date" id="nascimento" name="nascimento" class="form-control" placeholder="Nascimento" require>
+                                <label for="nome_a" class="visually-hidden">Nome</label>
+                                <input type="text" id="nome_a" name="nome_a" class="form-control" placeholder="Nome"  required autofocus>
+                                <label for="user_a" class="visually-hidden">Username</label>
+                                <input type="text" id="user_a" name="user_a" class="form-control" placeholder="Username" require>
+                                <label for="pass_a" class="visually-hidden">Password</label>
+                                <input type="password" id="pass_a" name="pass_a" class="form-control" placeholder="Password" required>
+                                <label for="nascimento_a" class="visually-hidden">Nascimento</label>
+                                <input type="date" id="nascimento_a" name="nascimento_a" class="form-control" placeholder="Nascimento" require>
                             </div>
                             
                             <div class="col-md-6">
-                                <label for="telefone" class="visually-hidden">Telefone</label>
-                                <input type="tel" id="telefone" name="telefone" class="form-control" placeholder="Telefone: 11-11111-1111" pattern="[0-9]{2}-[0-9]{5}-[0-9]{4}" require>
-                                <label for="convenio" class="visually-hidden">Convênio</label>
-                                <input type="text" id="convenio" name="convenio" class="form-control" placeholder="Convênio">
-                                <label for="tipo_sangue" class="visually-hidden">Tipo sanguíneo</label>
-                                <input type="text" id="tipo_sangue" name="tipo_sangue" class="form-control" placeholder="Tipo sanguíneo" require>
-                                <label for="cpf" class="visually-hidden">CPF</label>
-                                <input type="text" id="cpf" name="cpf" class="form-control" placeholder="CPF: 111.111.111-11" pattern="[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}" require>
+                                <label for="telefone_a" class="visually-hidden">Telefone</label>
+                                <input type="tel" id="telefone_a" name="telefone_a" class="form-control" placeholder="Telefone: 11-11111-1111" pattern="[0-9]{2}-[0-9]{5}-[0-9]{4}" require>
+                                <label for="convenio_a" class="visually-hidden">Convênio</label>
+                                <input type="text" id="convenio_a" name="convenio_a" class="form-control" placeholder="Convênio">
+                                <label for="tipoSangue_a" class="visually-hidden">Tipo sanguíneo</label>
+                                <input type="text" id="tipoSangue_a" name="tipoSangue_a" class="form-control" placeholder="Tipo sanguíneo" require>
+                                <label for="cpf_a" class="visually-hidden">CPF</label>
+                                <input type="text" id="cpf_a" name="cpf_a" class="form-control" placeholder="CPF: 111.111.111-11" pattern="[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}" require>
                             </div>
                         </div>
                         <input type="checkbox" id="diretoria" name="diretoria">
-                        <label for="diretoria">Membro da diretoria</label>
+                        <label for="diretoria"><strong>Membro da diretoria</strong></label>
                         <button class="w-100 btn btn-outline-warning" type="submit" name='cadastrar'>Cadastrar</button>
                     </form>
-                    <!-- se a SESSION já estiver setada, significa que já foi tentado realizar login, e então da um alert de qual foi o erro. -->
+                    
+
                     <?php 
-                            if (isset($_SESSION['user'])) {
-                                if ($_SESSION['user'] == '' && $_SESSION['password'] == 'password_invalido') {
-                                    echo "<br><div class='alert alert-warning'> senha inválida! </div>";
+                            if (isset($_SESSION['cadastrar'])) {
+                                if ($_SESSION['cadastrar'] == 'user_cadastrado') {
+                                    echo "<br><div class='alert alert-warning'> Atleta cadastrado com sucesso! </div>";
                                 }
-                                else if ($_SESSION['user'] == 'login_invalido' || $_SESSION['password'] == 'password_invalido') {
-                                    echo "<br><div class='alert alert-warning'> user inválido! </div>";
-                                }
-                                else {
-                                    echo "<br><div class='alert alert-warning'> erro ao cadastrar atleta! </div>";
+                                else if ($_SESSION['cadastrar'] == 'user_invalido') {
+                                    echo "<br><div class='alert alert-warning'> user já em uso! </div>";
                                 }
                             }
                     ?>
@@ -108,15 +107,14 @@
             <div class="row">
                 <div class="container-tabela">
                 <h1 class="h3 mb-3 fw-bold">Atletas cadastrados</h1>
-                    <?php 
-                        $select = $a->select();
-                        echo "<pre>";
-                        var_dump($select);    
-                        echo "</pre>";             
-                    ?>
 
+                <?php 
+                    include 'tabela_atletas.php';
+                                
+                    if($_SESSION['select']) {
+                ?>
 
-                    <table class="table table-striped table-warning table-bordered table-hover">
+                    <table class="table table-dark table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th>Id</th>
@@ -134,41 +132,20 @@
                         </thead>
         
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Roberta Silvano</td>
-                                <td>robs</td>
-                                <td>adjdiasdjisd</td>
-                                <td>1996-07-01</td>
-                                <td>11111111111</td>
-                                <td>SC</td>
-                                <td>O+</td>
-                                <td>11111111111</td>
-                                <td>Sim</td>
-                                <td>
-                                    <a href="#">Editar</a>
-                                    <a href="#">Excluir</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>a</td>
-                                <td>a</td>
-                                <td>a</td>
-                                <td>a</td>
-                                <td>a</td>
-                                <td>a</td>
-                                <td>a</td>
-                                <td>a</td>
-                                <td>a</td>
-                                <td>a</td>
-                                <td>
-                                    <a href="#">Editar</a>
-                                    <a href="#">Excluir</a>
-                                </td>
-                            </tr>
+                            <?php 
+                                tabela($select);
+                            ?>
                         </tbody>
         
                     </table>
+
+                    <?php 
+                    }
+                    else {
+                        echo "<br><div class='alert alert-warning'>Ainda não há atletas cadastrados!</div>";
+                    }
+                    ?>
+
                 </div>
             </div>
           
