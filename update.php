@@ -80,13 +80,13 @@ $id_up = $_GET['id_up'];
                             
                             <div class="col-md-6">
                                 <label for="telefone_a" class="visually-hidden">Telefone</label>
-                                <input type="tel" id="telefone_a" name="telefone_a" class="form-control" placeholder="Telefone: 11-11111-1111" pattern="[0-9]{2}-[0-9]{5}-[0-9]{4}" value="<?= $select_id['telefone'] ?>" require>
+                                <input type="tel" id="telefone_a" name="telefone_a" class="form-control" placeholder="Telefone: 11111111111" pattern="[0-9]{11}" value="<?= $select_id['telefone'] ?>" require>
                                 <label for="convenio_a" class="visually-hidden">Convênio</label>
                                 <input type="text" id="convenio_a" name="convenio_a" class="form-control" placeholder="Convênio" value="<?= $select_id['convenio'] ?>">
                                 <label for="tipoSangue_a" class="visually-hidden">Tipo sanguíneo</label>
                                 <input type="text" id="tipoSangue_a" name="tipoSangue_a" class="form-control" placeholder="Tipo sanguíneo" value="<?= $select_id['tipo_sangue'] ?>" require>
                                 <label for="cpf_a" class="visually-hidden">CPF</label>
-                                <input type="text" id="cpf_a" name="cpf_a" class="form-control" placeholder="CPF: 111.111.111-11" pattern="[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}" value="<?= $select_id['cpf'] ?>" require>
+                                <input type="text" id="cpf_a" name="cpf_a" class="form-control" placeholder="CPF: 11111111111" pattern="[0-9]{11}" value="<?= $select_id['cpf'] ?>" require>
                             </div>
                         </div>
                         <input type="checkbox" id="diretoria" name="diretoria" value="<?= $select_id['diretoria'] ?>">
