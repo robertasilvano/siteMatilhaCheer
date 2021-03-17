@@ -57,8 +57,22 @@ class Atleta {
     }
 
     public function update($id) {
-        $update = $this->select_id($id);
-        return $update;
+        $update = $this->conn->conectar()->prepare("UPDATE atletas SET nome = :nome, user = :user, pass = :pass, nascimento = :nascimento, telefone = :telefone, convenio = :convenio, tipo_sangue = :tipo_sangue, cpf = :cpf, diretoria = :diretoria  WHERE id = :id");
+
+        $update->bindParam(":nome", $this->nome, PDO::PARAM_STR);
+        $update->bindParam(":user", $this->user, PDO::PARAM_STR);
+        $update->bindParam(":pass", $this->pass, PDO::PARAM_STR);
+        $update->bindParam(":nascimento", $this->nascimento, PDO::PARAM_STR);
+        $update->bindParam(":telefone", $this->telefone, PDO::PARAM_STR);
+        $update->bindParam(":convenio", $this->convenio, PDO::PARAM_STR);
+        $update->bindParam(":tipo_sangue", $this->tipo_sangue, PDO::PARAM_STR);
+        $update->bindParam(":cpf", $this->cpf, PDO::PARAM_STR);
+        $update->bindParam(":diretoria", $this->diretoria, PDO::PARAM_STR);
+        $update->bindParam(":id", $id, PDO::PARAM_STR);
+
+        $update->execute();
+
+        echo "<script> location.href = 'cadastro.php' </script>";
     }
 
     public function delete($id) {

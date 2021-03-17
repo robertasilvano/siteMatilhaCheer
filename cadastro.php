@@ -152,7 +152,7 @@ session_start();
                             $atleta->delete($_GET['id_del']);
                         }
                         else if(isset($_GET['id_up'])){
-                            $update = $atleta->update($_GET['id_up']);
+                            echo "<script> location.href = 'update?id_up=".$_GET['id_up'].".php' </script>";
                         }
                     ?>
 
