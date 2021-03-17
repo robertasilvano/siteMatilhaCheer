@@ -1,7 +1,6 @@
 <?php
 
 session_start();
-
 require_once ("classe_atleta.php");
 
 // Script para tratar os dados do formulário de 

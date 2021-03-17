@@ -110,8 +110,9 @@ session_start();
 
                 <?php 
                     include 'tabela_atletas.php';
-                                
-                    if($_SESSION['select']) {
+                    $select = $atleta->select();         
+                    
+                    if($select) {
                 ?>
 
                     <table class="table table-dark table-bordered table-hover">
@@ -133,7 +134,7 @@ session_start();
         
                         <tbody>
                             <?php 
-                                tabela($select);
+                                $atleta->printar_tabela($select);
                             ?>
                         </tbody>
         
@@ -144,6 +145,15 @@ session_start();
                     else {
                         echo "<br><div class='alert alert-warning'>Ainda não há atletas cadastrados!</div>";
                     }
+                    ?>
+
+                    <?php 
+                        if(isset($_GET['id_del'])) {
+                            $atleta->delete($_GET['id_del']);
+                        }
+                        else if(isset($_GET['id_up'])){
+                            $update = $atleta->update($_GET['id_up']);
+                        }
                     ?>
 
                 </div>

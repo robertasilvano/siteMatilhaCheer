@@ -19,8 +19,7 @@ class Atleta {
         $this->conn = new ConexaoPDO();
     }
 
-    public function select()
-    {
+    public function select() {
         $select = $this->conn->conectar()->query("SELECT * FROM atletas");
         $select = $select->fetchAll(PDO::FETCH_ASSOC);
 
@@ -56,6 +55,45 @@ class Atleta {
         else return False;
         
     }
+
+    public function update($id) {
+        $update = $this->select_id($id);
+        return $update;
+    }
+
+    public function delete($id) {
+        $delete = $this->conn->conectar()->prepare("DELETE FROM atletas WHERE id = :id");
+
+        $delete->bindParam(":id", $id, PDO::PARAM_STR);
+
+        $delete->execute();
+
+        echo "<script> location.href = 'cadastro.php' </script>";
+    }
+
+    public function printar_tabela($select) {
+        
+        for ($i=0; $i < count($select); $i++) {
+            echo "<tr>";
+            foreach ($select[$i] as $k => $v) {
+                if ($k != 'diretoria') {
+                    echo "<td>" . $v . "</td>";
+                }
+                else {
+                    if ($v == 1) {
+                        echo "<td> Sim </td>";
+                    }
+                    else {
+                        echo "<td> Não </td>";
+                    }
+                }
+            }
+            echo "<td><a class='btn btn-outline-warning btn-sm' href='cadastro.php?id_del=". $select[$i]['id'] . "'>Excluir</a><a class='btn btn-outline-warning btn-sm' href='cadastro.php?id_up=". $select[$i]['id'] . "'>Editar</a></td>";
+            echo "</tr>";
+        }
+    }
+
+
 
     public function getNome() {
         return $this->nome;
