@@ -1,6 +1,7 @@
 <?php 
     session_start();
     require_once("classe_atleta.php");
+    
     $a = new Atleta("avii_desenvweb", "localhost", "root", "");
 ?>
 
@@ -88,15 +89,12 @@
                     </form>
                     <!-- se a SESSION já estiver setada, significa que já foi tentado realizar login, e então da um alert de qual foi o erro. -->
                     <?php 
-                            if (isset($_SESSION['user'])) {
-                                if ($_SESSION['user'] == '' && $_SESSION['password'] == 'password_invalido') {
-                                    echo "<br><div class='alert alert-warning'> senha inválida! </div>";
+                            if (isset($_SESSION['cadastrar'])) {
+                                if ($_SESSION['cadastrar'] == 'user_cadastrado') {
+                                    echo "<br><div class='alert alert-warning'> Atleta cadastrado com sucesso! </div>";
                                 }
-                                else if ($_SESSION['user'] == 'login_invalido' || $_SESSION['password'] == 'password_invalido') {
-                                    echo "<br><div class='alert alert-warning'> user inválido! </div>";
-                                }
-                                else {
-                                    echo "<br><div class='alert alert-warning'> erro ao cadastrar atleta! </div>";
+                                else if ($_SESSION['cadastrar'] == 'user_invalido') {
+                                    echo "<br><div class='alert alert-warning'> user já em uso! </div>";
                                 }
                             }
                     ?>
@@ -108,67 +106,75 @@
             <div class="row">
                 <div class="container-tabela">
                 <h1 class="h3 mb-3 fw-bold">Atletas cadastrados</h1>
-                    <?php 
-                        $select = $a->select();
-                        echo "<pre>";
-                        var_dump($select);    
-                        echo "</pre>";             
-                    ?>
 
+                <?php 
+                    $select = $a->select();
+                                
+                    if(count($select) > 0) {
+                ?>
 
-                    <table class="table table-striped table-warning table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Nome</th>
-                                <th>User</th>
-                                <th>Password</th>
-                                <th>Nascimento</th>
-                                <th>Telefone</th>
-                                <th>Convênio</th>
-                                <th>Tipo sanguíneo</th>
-                                <th>CPF</th>
-                                <th>Membro diretoria</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-        
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Roberta Silvano</td>
-                                <td>robs</td>
-                                <td>adjdiasdjisd</td>
-                                <td>1996-07-01</td>
-                                <td>11111111111</td>
-                                <td>SC</td>
-                                <td>O+</td>
-                                <td>11111111111</td>
-                                <td>Sim</td>
-                                <td>
-                                    <a href="#">Editar</a>
-                                    <a href="#">Excluir</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>a</td>
-                                <td>a</td>
-                                <td>a</td>
-                                <td>a</td>
-                                <td>a</td>
-                                <td>a</td>
-                                <td>a</td>
-                                <td>a</td>
-                                <td>a</td>
-                                <td>a</td>
-                                <td>
-                                    <a href="#">Editar</a>
-                                    <a href="#">Excluir</a>
-                                </td>
-                            </tr>
-                        </tbody>
-        
-                    </table>
+                <table class="table table-dark table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nome</th>
+                            <th>User</th>
+                            <th>Password</th>
+                            <th>Nascimento</th>
+                            <th>Telefone</th>
+                            <th>Convênio</th>
+                            <th>Tipo sanguíneo</th>
+                            <th>CPF</th>
+                            <th>Membro diretoria</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+    
+                    <tbody>
+                        <?php 
+                            for ($i=0; $i < count($select); $i++) {
+                                echo "<tr>";
+                                foreach ($select[$i] as $k => $v) {
+                                    if ($k != 'diretoria') {
+                                        echo "<td>" . $v . "</td>";
+                                    }
+                                    else {
+                                        if ($v == 1) {
+                                            echo "<td> Sim </td>";
+                                        }
+                                        else {
+                                            echo "<td> Não </td>";
+                                        }
+                                    }
+                                }
+                                echo "<td><a class='btn btn-outline-warning btn-sm' href='cadastro.php?id_del=". $select[$i]['id'] . "'>Excluir</a><a class='btn btn-outline-warning btn-sm' href='cadastro.php?id_up=". $select[$i]['id'] . "'>Editar</a></td>";
+                                echo "</tr>";
+                            }
+                        ?>
+                    </tbody>
+                </table>
+
+                <?php 
+                    }
+                    else {
+                        echo "<br><div class='alert alert-warning'>Ainda não há atletas cadastrados!</div>";
+                    }
+                ?>
+
+                <?php 
+                    if(isset($_GET['id_del'])) {
+                        $id_excluir = $_GET['id_del'];
+                        $a->delete($id_excluir);
+                        echo "<script> location.href = 'cadastro.php' </script>";
+                    }
+                    else if(isset($_GET['id_up'])) {
+                        $id_update = $_GET['id_up'];
+                        $res = $a->select_id($id_update);
+                        
+                        echo "<script> location.href = 'cadastro.php' </script>";
+                    }
+                
+                ?>
                 </div>
             </div>
           

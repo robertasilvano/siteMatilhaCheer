@@ -2,7 +2,7 @@
     session_start();
 
     //verifica se foi tentado fazer o login
-    if (isset($_POST['user'])) {
+    if (isset($_POST['login'])) {
 
         //verifica se as infos do login estão corretas
         if ($_POST['user'] == 'roberta' && $_POST['password'] == '123') {
