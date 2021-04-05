@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `atletas` (
 ) ENGINE=MyISAM AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 INSERT INTO `atletas` (`nome`, `user`, `pass`, `nascimento`, `telefone`, `convenio`, `tipo_sangue`, `cpf`, `diretoria`) VALUES
-('Roberta Silvano', 'robs', 'a', '1996-07-01', '11111111111', 'SC Saúde', 'O+', '11111111111', 1),
-('Raul Brum Weschenfelder', 'raul', '123', '1999-10-10', '1231232', NULL, 'O-', '12321312312', 0),
-('Victor Seabra', 'seabra', '000', '2021-04-02', '99999999', 'Unimed', 'AB', '99999999', 1);
-COMMIT;
+('Roberta Silvano Pereira', 'robs', 'a', '1996-07-01', '11111111111', 'SC Saúde', 'O+', '11111111111', 1),
+('Raul Weschenfelder', 'raul', '123', '1999-10-10', '11111111111', '', 'O-', '11111111111', 0),
+('Victor Seabra', 'seabra', '111', '2015-12-30', '11111111111', 'Unimed', 'AB+', '11111111111', 1),
+('Otavio Moratelli', 'otavio', '222', '2020-12-28', '11111111111', 'm', 'a', '11111111111', 1);

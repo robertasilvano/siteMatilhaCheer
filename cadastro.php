@@ -69,7 +69,7 @@ session_start();
                                 <label for="pass_a" class="visually-hidden">Password</label>
                                 <input type="password" id="pass_a" name="pass_a" class="form-control" placeholder="Password" required>
                                 <label for="nascimento_a" class="visually-hidden">Nascimento</label>
-                                <input type="date" id="nascimento_a" name="nascimento_a" class="form-control" placeholder="Nascimento" require>
+                                <input type="date" id="nascimento_a" name="nascimento_a" class="form-control" placeholder="Nascimento" max= require>
                             </div>
                             
                             <div class="col-md-6">
@@ -97,6 +97,7 @@ session_start();
                                 else if ($_SESSION['cadastrar'] == 'user_invalido') {
                                     echo "<br><div class='alert alert-warning'> user já em uso! </div>";
                                 }
+                                $_SESSION['cadastrar'] = '';
                             }
                     ?>
                 </div>
@@ -118,7 +119,6 @@ session_start();
                     <table class="table table-dark table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>Id</th>
                                 <th>Nome</th>
                                 <th>User</th>
                                 <th>Password</th>
@@ -149,11 +149,30 @@ session_start();
 
                     <?php 
                         if(isset($_GET['id_del'])) {
-                            $atleta->delete($_GET['id_del']);
+                            echo "<script> location.href = 'delete?id_del=".$_GET['id_del'].".php' </script>";
                         }
                         else if(isset($_GET['id_up'])){
                             echo "<script> location.href = 'update?id_up=".$_GET['id_up'].".php' </script>";
                         }
+                        if(isset($_SESSION['delete'])){
+                            if ($_SESSION['delete'] == 'delete_ok'){
+                                echo "<br><div class='alert alert-warning'> Delete realizado com sucesso! </div>";
+                            }
+                            else if ($_SESSION['delete'] == 'delete_erro') {
+                                echo "<br><div class='alert alert-warning'> Erro ao realizar delete! </div>";
+                            }
+                            $_SESSION['delete'] = '';
+                        }
+                        if(isset($_SESSION['update'])){
+                            if ($_SESSION['update'] == 'update_ok'){
+                                echo "<br><div class='alert alert-warning'> Update realizado com sucesso! </div>";
+                            }
+                            else if ($_SESSION['update'] == 'update_erro') {
+                                echo "<br><div class='alert alert-warning'> Erro ao realizar update! </div>";
+                            }
+                            $_SESSION['update'] = '';
+                        }
+
                     ?>
 
 

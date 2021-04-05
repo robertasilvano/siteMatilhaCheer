@@ -39,8 +39,9 @@ else {
     }
     else {  
         $_SESSION['update'] = 'update_erro';
-        echo "<script> location.href = 'cadastro.php' </script>";
     }
+
+    echo "<script> location.href = 'cadastro.php' </script>";
     
 }
 

@@ -1,6 +1,6 @@
 <?php
 
-require_once("ConexaoPDO.php");
+require_once("sql/ConexaoPDO.php");
 
 class Atleta {
 
@@ -111,9 +111,8 @@ class Atleta {
         $update->bindParam(":diretoria", $this->diretoria, PDO::PARAM_STR);
         $update->bindParam(":id", $id, PDO::PARAM_STR);
 
-        $update->execute();
-
-        echo "<script> location.href = 'cadastro.php' </script>";
+        if($update->execute()) return True;
+        else return False;
     }
 
     public function delete($id) {
@@ -121,9 +120,8 @@ class Atleta {
 
         $delete->bindParam(":id", $id, PDO::PARAM_STR);
 
-        $delete->execute();
-
-        echo "<script> location.href = 'cadastro.php' </script>";
+        if($delete->execute()) return True;
+        else return False;
     }
 
     public function printar_tabela($select) {
@@ -131,10 +129,10 @@ class Atleta {
         for ($i=0; $i < count($select); $i++) {
             echo "<tr>";
             foreach ($select[$i] as $k => $v) {
-                if ($k != 'diretoria') {
+                if ($k != 'diretoria' && $k != 'id') {
                     echo "<td>" . $v . "</td>";
                 }
-                else {
+                else if ($k == 'diretoria') {
                     if ($v == 1) {
                         echo "<td> Sim </td>";
                     }

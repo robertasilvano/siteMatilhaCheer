@@ -6,6 +6,7 @@ require_once ("classe_atleta.php");
 $atleta = new Atleta();
 
 $select_id = $atleta->select_id($_GET['id_up']);
+print_r($select_id);
 $id_up = $_GET['id_up'];
 
 ?>
@@ -60,7 +61,6 @@ $id_up = $_GET['id_up'];
         <!-- só tem acesso a essa página quem é atleta, então é necessário fazer a validação. Se não estiver logado, vai pra página de login. -->
         <?php 
             include 'validacao_logado_atletas.php';
-            echo $id_up;
         ?>
             <div class="row">
                 <div class="container-cadastro">
@@ -89,8 +89,8 @@ $id_up = $_GET['id_up'];
                                 <input type="text" id="cpf_a" name="cpf_a" class="form-control" placeholder="CPF: 11111111111" pattern="[0-9]{11}" value="<?= $select_id['cpf'] ?>" require>
                             </div>
                         </div>
-                        <input type="checkbox" id="diretoria" name="diretoria" value="<?= $select_id['diretoria'] ?>">
-                        <label for="diretoria"><strong>Membro da diretoria</strong></label>
+                        <input type="checkbox" id="diretoria_a" name="diretoria_a" <?php if ($select_id['diretoria'] == 1) echo "checked"; ?>>
+                        <label for="diretoria_a"><strong>Membro da diretoria</strong></label>
                         <button class="w-100 btn btn-outline-warning" type="submit" name='update'>Atualizar</button>
                     </form>
                 </div>
