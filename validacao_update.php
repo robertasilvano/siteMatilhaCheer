@@ -6,7 +6,7 @@ require_once ("classe_atleta.php");
 // Script para tratar os dados do formulário de 
 // cadastro de usuários
 
-if(!isset($_POST['cadastrar'])) {
+if(!isset($_POST['update'])) {
     header("location: cadastro.php?error=true");
 }
 
@@ -34,15 +34,14 @@ else {
     $atleta->setCPF($cpf_a);
     $atleta->setDiretoria($diretoria_a);
 
-    if ($atleta->insert()) {
-        $_SESSION['cadastrar'] = 'user_cadastrado';
+    if ($atleta->update($_GET['id_up'])) {
+        $_SESSION['update'] = 'update_ok';
     }
     else {  
-        $_SESSION['cadastrar'] = 'user_invalido';
-        
+        $_SESSION['update'] = 'update_erro';
+        echo "<script> location.href = 'cadastro.php' </script>";
     }
     
-    echo "<script> location.href = 'cadastro.php' </script>";
 }
 
 ?>

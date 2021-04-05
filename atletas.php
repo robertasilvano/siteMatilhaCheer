@@ -1,5 +1,6 @@
-<?php 
-    session_start();
+<?php
+session_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -81,7 +82,7 @@
               <p><a class="btn btn-outline-warning" href="#">Go &raquo;</a></p>
             </div>
           </div>
-
+      
           <!-- botão pra fazer logout, que a ação destrói a sessão  -->
           <div class="row">
             <div class="container-logout">

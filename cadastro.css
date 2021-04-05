@@ -10,7 +10,7 @@ body {
     padding-right: 10%;
   }
   
-.form-control {
+  .form-control {
     position: relative;
     box-sizing: border-box;
     height: auto;
