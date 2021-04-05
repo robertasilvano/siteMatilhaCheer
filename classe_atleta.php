@@ -45,7 +45,7 @@ class Atleta {
                 $resultado = $logar->fetch(PDO::FETCH_ASSOC);
                 $_SESSION['user'] = $resultado['user'];
                 $_SESSION['diretoria'] = $resultado['diretoria'];
-                include("validacao_logado_login.php");
+                include("validacao_logado.php");
             } else {
                 header("location: login.php?error=true");
             }

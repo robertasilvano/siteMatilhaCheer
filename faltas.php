@@ -48,13 +48,13 @@
       <main class="text-center">
 
         <!-- só tem acesso a essa página quem é atleta, então é necessário fazer a validação. Se não estiver logado, vai pra página de login. -->
-        <?php include 'validacao_logado_atletas.php';?>
+        <?php include 'validacao_atletas.php';?>
 
           <div class="row justify-content-center">
             <div class="container-faltas">
 
                 <!-- formulário para inserir as infos necessárias -->
-                <form method="post" action="trata_faltas.php">
+                <form method="post" action="mostra_faltas.php">
                     <h1 class="h3 mb-3 fw-bold">Insira sua falta aqui 😥</h1>
                     <br>
                     <label for="justificativa" class="visually-hidden">Justificativa</label>

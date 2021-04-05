@@ -50,7 +50,7 @@
       <main class="text-center">
 
         <!-- só tem acesso a essa página quem é atleta, então é necessário fazer a validação. Se não estiver logado, vai pra página de login. -->
-        <?php include 'validacao_logado_diretoria.php';?>
+        <?php include 'validacao_diretoria.php';?>
 
           <!-- listagem das funcionalidades do sistema -->
           <div class="row">

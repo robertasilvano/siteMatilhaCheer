@@ -46,7 +46,7 @@
 
       <main class="text-center">
         <!-- só tem acesso a essa página quem é atleta, então verifica se já está logado. se não, vai pra página de login -->
-         <?php include 'validacao_logado_atletas.php';?>
+         <?php include 'validacao_atletas.php';?>
           <div class="row justify-content-center">
                 <?php
                     // printa o que foi inserido pelo usuário no formulário da página 'faltas.php'

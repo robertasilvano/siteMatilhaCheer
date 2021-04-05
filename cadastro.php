@@ -54,7 +54,7 @@ session_start();
 
         <!-- só tem acesso a essa página quem é atleta, então é necessário fazer a validação. Se não estiver logado, vai pra página de login. -->
         <?php 
-            include 'validacao_logado_atletas.php';
+            include 'validacao_atletas.php';
         ?>
             <div class="row">
                 <div class="container-cadastro">

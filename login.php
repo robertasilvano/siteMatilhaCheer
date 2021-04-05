@@ -50,7 +50,7 @@
         <main class="text-center">
 
             <!-- verifica se já está logado. se sim, vai direto pra página de atletas. se não, aparece o formulário de login. -->
-            <?php include 'validacao_logado_login.php';?>
+            <?php include 'validacao_logado.php';?>
                     <div class="row">
                         <div class="container-login">
                             <form method="post" action="validacao_login.php">
