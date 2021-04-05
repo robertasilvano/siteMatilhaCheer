@@ -148,8 +148,6 @@ class Atleta {
         }
     }
 
-
-
     public function getNome() {
         return $this->nome;
     }

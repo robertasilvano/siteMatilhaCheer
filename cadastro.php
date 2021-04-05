@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-
+                 
 ?>
 
 
@@ -155,6 +155,7 @@ session_start();
                             echo "<script> location.href = 'update?id_up=".$_GET['id_up'].".php' </script>";
                         }
                     ?>
+
 
                 </div>
             </div>
