@@ -90,6 +90,8 @@ session_start();
                     
 
                     <?php 
+
+                            //cadastro
                             if (isset($_SESSION['cadastrar'])) {
                                 if ($_SESSION['cadastrar'] == 'user_cadastrado') {
                                     echo "<br><div class='alert alert-warning'> Atleta cadastrado com sucesso! </div>";
@@ -99,6 +101,38 @@ session_start();
                                 }
                                 $_SESSION['cadastrar'] = '';
                             }
+
+                            //update
+                            if(isset($_GET['id_up'])){
+                                echo "<script> location.href = 'update?id_up=".$_GET['id_up'].".php' </script>";
+                            }
+
+                            if(isset($_SESSION['update'])){
+                                if ($_SESSION['update'] == 'update_ok'){
+                                    echo "<br><div class='alert alert-warning'> Update realizado com sucesso! </div>";
+                                }
+                                else if ($_SESSION['update'] == 'update_erro') {
+                                    echo "<br><div class='alert alert-warning'> Erro ao realizar update! </div>";
+                                }
+                                $_SESSION['update'] = '';
+                            }
+
+                            //delete
+                            if(isset($_GET['id_del'])) {
+                                echo "<script> location.href = 'delete?id_del=".$_GET['id_del'].".php' </script>";
+                            }
+
+                            if(isset($_SESSION['delete'])){
+                                if ($_SESSION['delete'] == 'delete_ok'){
+                                    echo "<br><div class='alert alert-warning'> Delete realizado com sucesso! </div>";
+                                }
+                                else if ($_SESSION['delete'] == 'delete_erro') {
+                                    echo "<br><div class='alert alert-warning'> Erro ao realizar delete! </div>";
+                                }
+                                $_SESSION['delete'] = '';
+                            }
+    
+    
                     ?>
                 </div>
             </div>
@@ -145,34 +179,6 @@ session_start();
                     else {
                         echo "<br><div class='alert alert-warning'>Ainda não há atletas cadastrados!</div>";
                     }
-                    ?>
-
-                    <?php 
-                        if(isset($_GET['id_del'])) {
-                            echo "<script> location.href = 'delete?id_del=".$_GET['id_del'].".php' </script>";
-                        }
-                        else if(isset($_GET['id_up'])){
-                            echo "<script> location.href = 'update?id_up=".$_GET['id_up'].".php' </script>";
-                        }
-                        if(isset($_SESSION['delete'])){
-                            if ($_SESSION['delete'] == 'delete_ok'){
-                                echo "<br><div class='alert alert-warning'> Delete realizado com sucesso! </div>";
-                            }
-                            else if ($_SESSION['delete'] == 'delete_erro') {
-                                echo "<br><div class='alert alert-warning'> Erro ao realizar delete! </div>";
-                            }
-                            $_SESSION['delete'] = '';
-                        }
-                        if(isset($_SESSION['update'])){
-                            if ($_SESSION['update'] == 'update_ok'){
-                                echo "<br><div class='alert alert-warning'> Update realizado com sucesso! </div>";
-                            }
-                            else if ($_SESSION['update'] == 'update_erro') {
-                                echo "<br><div class='alert alert-warning'> Erro ao realizar update! </div>";
-                            }
-                            $_SESSION['update'] = '';
-                        }
-
                     ?>
 
 

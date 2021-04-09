@@ -47,7 +47,7 @@ class Atleta {
                 $_SESSION['diretoria'] = $resultado['diretoria'];
                 include("validacao_logado.php");
             } else {
-                header("location: login.php?error=true");
+                echo "<script> location.href = 'login.php?error=true' </script>";
             }
             
         } catch(PDOException $e) {
