@@ -12,7 +12,7 @@
  */
 
 body {
-    background-image: url("../imgs/pata_fundo2.png");
+    background-image: url("/assets/imgs/pata_fundo2.png");
     background-size: cover;
     background-repeat: repeat-y;
 }

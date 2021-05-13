@@ -1,23 +1,39 @@
 {% extends "base.html" %}
 
 {% block title %}
-Matilha Cheer
+Login
 {% endblock %}
 
 {% block styles %}
-  <link href="../../public/assets/css/home.css" rel="stylesheet">
+<link href="/assets/css/login.css" rel="stylesheet">
 {% endblock %}
     
 {% block body %}
 <main class="text-center">
-    <div class="row">
-      <h1>Matilha Cheer.</h1>
-      <p class="lead">Olá, cheerleader! Nós somos o time da UFSC Campus Araranguá. Por aqui você pode conhecer mais sobre o esporte e sobre nosso time. Além disso, se você for nosso atleta, acessa a página de login para poder ver algumas funcionalidades exclusivas. 🌟🤸‍♂️</p>
-    </div>
+
+  <!-- verifica se já está logado. se sim, vai direto pra página de atletas. se não, aparece o formulário de login. -->
+  <!--<?php include 'validacao_logado.php';?>-->
+          <div class="row">
+              <div class="container-login">
+                  <form method="post" action="validacao_login.php">
+                      <h1 class="h3 mb-3 fw-bold">5, 6, 7, 8!</h1>
+                      <label for="user" class="visually-hidden">Username</label>
+                      <input type="text" id="user" name="user" class="form-control" placeholder="Username"  required autofocus>
+                      <label for="password" class="visually-hidden">Password</label>
+                      <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+                      <br>
+                      <button class="w-100 btn btn-outline-warning" type="submit" name='login'>Login</button>
+                  </form>
+              
+                  <!-- se a SESSION já estiver setada, significa que já foi tentado realizar login, e então da um alert de qual foi o erro. -->
+                  <!--<?php 
+                      if (isset($_GET['error'])) {
+                          echo "<br><div class='alert alert-warning'> erro ao fazer login! </div>";
+                      }
+                  ?>-->
+              </div>
+          </div>
+  </div>
 </main>
 
-<!-- botão pra página sobre o esporte -->
-<footer class="text-center">
-   <p><a href="#" class="cheer">Sobre o esporte</a></p>
-</footer>
 {% endblock %}

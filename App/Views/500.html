@@ -1,10 +1,20 @@
 {% extends "base.html" %}
 
 {% block title %}
-    Page not found
+    500
+{% endblock %}
+
+{% block styles %}
+<link href="/assets/css/home.css" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
-    <h1>Ocorreu um erro</h1>
-    <p>Desculpe-me, ocorreu um erro. Se o problema persistir, contacte o administrador do sistema.</p>
+
+    <main class="text-center">
+        <div class="row">
+        <h1>Ocorreu um erro</h1>
+        <p class="lead">Desculpe-me, ocorreu um erro. Se o problema persistir, contacte o administrador do sistema. 😥</p>
+        </div>
+    </main>
+
 {% endblock %}

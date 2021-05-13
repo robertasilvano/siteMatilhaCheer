@@ -5,15 +5,15 @@ namespace App\Models;
 use PDO;
 use PDOException;
 
-class Post extends \Core\Model {
+class Atleta extends \Core\Model {
 
     public static function getAll() {
         try {
             $db = static::getConexaoBD();
 
-            $stmt = $db->query('SELECT id, titulo, conteudo FROM posts ORDER BY criado_em');
+            $stmt = $db->query('SELECT * FROM atletas');
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+            
             return $results;
         }
         catch (PDOException $e) {

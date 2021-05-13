@@ -4,14 +4,10 @@ namespace App\Controllers;
 
 use \Core\View;
 
-class Login extends \Core\Controller {
+class Sobre extends \Core\Controller {
     public function indexAction() {
 
-        View::renderTemplate('Login/index.html');
-    }
-
-    public function loginAction() {
-        
+        View::renderTemplate('Sobre/index.html');
     }
 
     protected function anterior() {

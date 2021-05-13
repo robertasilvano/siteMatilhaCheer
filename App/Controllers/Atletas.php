@@ -2,15 +2,15 @@
 
 namespace App\Controllers;
 
-use App\Models\Post;
+use App\Models\Atleta;
 use \Core\View;
 
 class Atletas extends \Core\Controller {
 
     public function indexAction() {
-        $posts = Post::getAll();
+        $atletas = Atleta::getAll();
 
-        View::renderTemplate('Atletas/index.html', ['posts' => $posts]);
+        View::renderTemplate('Atletas/index.html', ['atletas' => $atletas]);
     }
 
     public function addNovo() {
