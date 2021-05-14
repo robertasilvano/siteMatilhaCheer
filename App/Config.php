@@ -9,6 +9,6 @@ class Config {
     const user = 'root';
     const pass = '';
     const sgbd = 'mysql';
-    const SHOW_ERRORS = false;
+    const SHOW_ERRORS = true;
 
 }

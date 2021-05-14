@@ -5,14 +5,3 @@
   color: #333;
   text-shadow: none; /* Prevent inheritance from `body` */
 }
-
-
-/*
- * Base structure
- */
-
-body {
-    background-image: url("/assets/imgs/pata_fundo2.png");
-    background-size: cover;
-    background-repeat: repeat-y;
-}

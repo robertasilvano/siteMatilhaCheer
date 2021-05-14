@@ -2,16 +2,19 @@
 
 namespace App\Controllers;
 
-use App\Models\Atleta;
 use \Core\View;
 
-class Atletas extends \Core\Controller {
+class Diretoria extends \Core\Controller {
 
     public function indexAction() {
-        $atletas = Atleta::getAll();
 
-        View::renderTemplate('Atletas/index.html', ['atletas' => $atletas]);
+        View::renderTemplate('Diretoria/index.html');
     }
+
+   public function cadastroAction() {
+
+        View::renderTemplate('Diretoria/cadastro.html');
+   }
 
     protected function anterior() {
         //echo "(ANTERIOR) ";

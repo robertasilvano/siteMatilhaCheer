@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}
+Matilha Cheer
+{% endblock %}
+
+{% block styles %}
+<link href="/assets/css/atletas.css" rel="stylesheet">
+{% endblock %}
+    
+{% block body %}
+
+<main class="text-center">
+
+  <!-- só tem acesso a essa página quem é atleta, então é necessário fazer a validação. Se não estiver logado, vai pra página de login. -->
+  <!--<?php include 'validacao_diretoria.php';?>-->
+
+    <!-- listagem das funcionalidades do sistema -->
+    <div class="row">
+      <div class="col-lg-6">
+        <img class="imagens" src="/assets/imgs/cadastro2.png">
+        <h2>Cadastro de atletas</h2>
+        <p class="a">Aqui você poderá adicionar, alterar e remover atletas. 👀</p>
+        <p><a class="btn btn-outline-warning" href="cadastro">Go &raquo;</a></p>
+      </div>
+
+      <div class="col-lg-6">
+        <img class="imagens" src="/assets/imgs/pautas.png">
+        <h2>Pautas</h2>
+        <p class="a">Aqui a diretoria tem acesso as pautas. 📣</p>
+        <p><a class="btn btn-outline-warning" href="#">Go &raquo;</a></p>
+      </div>
+
+ </main>
+
+{% endblock %}

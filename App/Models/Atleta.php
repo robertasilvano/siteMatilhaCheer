@@ -5,7 +5,7 @@ namespace App\Models;
 use PDO;
 use PDOException;
 
-class Atleta extends \Core\Model {
+class Usuario extends \Core\Model {
 
     public static function getAll() {
         try {
