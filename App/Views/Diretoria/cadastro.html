@@ -18,49 +18,69 @@ Matilha Cheer
     ?>-->
         <div class="row">
             <div class="container-cadastro">
-                <form  method="post" action="validacao_cadastro.php" class="form-cadastro">
+                <form  method="post" action="/diretoria/cadastrar" class="form-cadastro">
                     <h1 class="h3 mb-3 fw-bold">Cadastrar atleta</h1>
                     <div class="row">
                         <div class="col-md-6">
-                            <label for="nome_a" class="visually-hidden">Nome</label>
-                            <input type="text" id="nome_a" name="nome_a" class="form-control" placeholder="Nome"  required autofocus>
-                            <label for="user_a" class="visually-hidden">Username</label>
-                            <input type="text" id="user_a" name="user_a" class="form-control" placeholder="Username" require>
-                            <label for="pass_a" class="visually-hidden">Password</label>
-                            <input type="password" id="pass_a" name="pass_a" class="form-control" placeholder="Password" required>
-                            <label for="nascimento_a" class="visually-hidden">Nascimento</label>
-                            <input type="date" id="nascimento_a" name="nascimento_a" class="form-control" placeholder="Nascimento" max= require>
+                            <div class="form-group">
+                                <label for="nome" class="visually-hidden">Nome</label>
+                                <input type="text" id="nome" name="nome" class="form-control" placeholder="Nome" autofocus required>
+                            </div>
+                            <div class="form-group">
+                                <label for="user" class="visually-hidden">Username</label>
+                                <input type="text" id="user" name="user" class="form-control" placeholder="Username" required>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input class="form-control" type="password" id="pass" name="pass" placeholder="Password" required>
+                                        <div class="input-group-append">
+                                            <button class="input-group-text" onclick="pass_eye()" id='olho'>
+                                                <i class="far fa-eye"></i>
+                                        </button>
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="nascimento" class="visually-hidden">Nascimento</label>
+                                <input type="date" id="nascimento" name="nascimento" class="form-control" placeholder="Nascimento" required>
+                            </div>
                         </div>
                         
                         <div class="col-md-6">
-                            <label for="telefone_a" class="visually-hidden">Telefone</label>
-                            <input type="tel" id="telefone_a" name="telefone_a" class="form-control" placeholder="Telefone: 11111111111" pattern="[0-9]{11}" require>
-                            <label for="convenio_a" class="visually-hidden">Convênio</label>
-                            <input type="text" id="convenio_a" name="convenio_a" class="form-control" placeholder="Convênio">
-                            <label for="tipoSangue_a" class="visually-hidden">Tipo sanguíneo</label>
-                            <input type="text" id="tipoSangue_a" name="tipoSangue_a" class="form-control" placeholder="Tipo sanguíneo" require>
-                            <label for="cpf_a" class="visually-hidden">CPF</label>
-                            <input type="text" id="cpf_a" name="cpf_a" class="form-control" placeholder="CPF: 11111111111" pattern="[0-9]{11}" require>
+                            <div class="form-group">
+                                <label for="telefone" class="visually-hidden">Telefone</label>
+                                <input type="tel" id="telefone" name="telefone" class="form-control" placeholder="Telefone: 11111111111" pattern="[0-9]{11}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="convenio" class="visually-hidden">Convênio</label>
+                                <input type="text" id="convenio" name="convenio" class="form-control" placeholder="Convênio">
+                            </div>
+                            <div class="form-group">
+                                <label for="tipo_sangue" class="visually-hidden">Tipo sanguíneo</label>
+                                <input type="text" id="tipo_sangue" name="tipo_sangue" class="form-control" placeholder="Tipo sanguíneo" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cpf" class="visually-hidden">CPF</label>
+                                <input type="text" id="cpf" name="cpf" class="form-control" placeholder="CPF: 11111111111" pattern="[0-9]{11}" required>
+                            </div>
                         </div>
                     </div>
-                    <input type="checkbox" id="diretoria_a" name="diretoria_a">
-                    <label for="diretoria_a"><strong>Membro da diretoria</strong></label>
+                    <div class="form-group">
+                        <input type="checkbox" id="diretoria" name="diretoria">
+                        <label for="diretoria"><strong>Membro da diretoria</strong></label>
+                    </div>
+                    
                     <button class="w-100 btn btn-outline-warning" type="submit" name='cadastrar'>Cadastrar</button>
                 </form>
-                
+
+                <!-- CADASTRO DE USUÁRIOS -->                
+                {% if user.cadastrado == 'sim' %}
+                    <br><div class='alert alert-warning'> Atleta cadastrado com sucesso! </div>
+                {% elseif user.cadastrado == 'erro' %}
+                    <br><div class='alert alert-warning'> User já em uso! </div>
+                {% endif %}
 
                 <!--<?php 
-
-                        //cadastro
-                        if (isset($_SESSION['cadastrar'])) {
-                            if ($_SESSION['cadastrar'] == 'user_cadastrado') {
-                                echo "<br><div class='alert alert-warning'> Atleta cadastrado com sucesso! </div>";
-                            }
-                            else if ($_SESSION['cadastrar'] == 'user_invalido') {
-                                echo "<br><div class='alert alert-warning'> user já em uso! </div>";
-                            }
-                            $_SESSION['cadastrar'] = '';
-                        }
 
                         //update
                         if(isset($_GET['id_up'])){
@@ -146,5 +166,30 @@ Matilha Cheer
         </div>
       
    </main>
+
+{% endblock %}
+
+{% block script %}
+   <script>
+
+       function pass_eye() {
+            var pass = $('#pass');
+            var olho = $('#olho');
+
+            olho.mousedown(function() {
+                pass.attr("type", "text");
+            });
+
+            olho.mouseup(function() {
+                pass.attr("type", "password");
+            });
+
+            olho.mouseout(function() {
+                pass.attr("type", "password");
+            });
+            
+       }
+   </script>
+
 
 {% endblock %}

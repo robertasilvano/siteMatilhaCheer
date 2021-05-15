@@ -2,7 +2,7 @@
 
 namespace App\Controllers\Admin;
 
-class Users extends \Core\Controller{
+class Admin extends \Core\Controller{
 
     public function indexAction() {
         echo "User Admin index";

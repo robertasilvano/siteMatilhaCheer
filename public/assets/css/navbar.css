@@ -4,7 +4,8 @@
   }
   
   .navbar-toggler-icon {
-    background-image: url("assets/imgs/toggler.png");
+    background-image: url("/assets/imgs/toggler.png");
+    
   }
   
   .nav-link {

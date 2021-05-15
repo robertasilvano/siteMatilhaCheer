@@ -16,6 +16,22 @@
     z-index: 2;
 }
 
+.input-group-append {
+    position: relative;
+    box-sizing: border-box;
+    font-size: 16px;
+    margin-top: 8px;
+}
+
+.input-group {
+    align-items: center;
+}
+
+.input-group-text {
+    padding-bottom: 11px;
+    padding-top: 11px;
+}
+
 .col-md-6{
     float: none;
     margin: auto;
