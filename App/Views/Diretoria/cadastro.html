@@ -74,10 +74,15 @@ Matilha Cheer
                 </form>
 
                 <!-- CADASTRO DE USUÁRIOS -->                
-                {% if user.cadastrado == 'sim' %}
+                {% if user.errors is not empty %}
+                    {% for error in user.errors %}
+                        <br><div class='alert alert-warning'> {{ error }}</div>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+
+                {% if sucesso == 1 %}
                     <br><div class='alert alert-warning'> Atleta cadastrado com sucesso! </div>
-                {% elseif user.cadastrado == 'erro' %}
-                    <br><div class='alert alert-warning'> User já em uso! </div>
                 {% endif %}
 
                 <!--<?php 
