@@ -11,29 +11,39 @@ Login
 {% block body %}
 <main class="text-center">
 
-  <!-- verifica se já está logado. se sim, vai direto pra página de atletas. se não, aparece o formulário de login. -->
-  <!--<?php include 'validacao_logado.php';?>-->
-          <div class="row">
-              <div class="container-login">
-                  <form method="post" action="validacao_login.php">
-                      <h1 class="h3 mb-3 fw-bold">5, 6, 7, 8!</h1>
-                      <label for="user" class="visually-hidden">Username</label>
-                      <input type="text" id="user" name="user" class="form-control" placeholder="Username"  required autofocus>
-                      <label for="password" class="visually-hidden">Password</label>
-                      <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
-                      <br>
-                      <button class="w-100 btn btn-outline-warning" type="submit" name='login'>Login</button>
-                  </form>
-              
-                  <!-- se a SESSION já estiver setada, significa que já foi tentado realizar login, e então da um alert de qual foi o erro. -->
-                  <!--<?php 
-                      if (isset($_GET['error'])) {
-                          echo "<br><div class='alert alert-warning'> erro ao fazer login! </div>";
-                      }
-                  ?>-->
-              </div>
-          </div>
-  </div>
+    <!-- verifica se já está logado. se sim, vai direto pra página de atletas. se não, aparece o formulário de login. -->
+    <!--<?php include 'validacao_logado.php';?>-->
+    <div class="row">
+        <div class="container-login">
+            <form method="post" action="/login/novo" class="form-login">
+                <h1 class="h3 mb-3 fw-bold">5, 6, 7, 8!</h1>
+                <div class="form-group">
+                    <label for="user" class="visually-hidden">Username</label>
+                    <input type="text" id="user" name="user" class="form-control" placeholder="Username" value="{{ user }}" required autofocus>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <input class="form-control" type="password" id="pass" name="pass" placeholder="Password" required>
+                            <div class="input-group-append">
+                                <span class="input-group-text" id='olho' name='olho'>
+                                    <i class="far fa-eye"></i>
+                                </span>
+                            </div>
+                    </div>
+                </div>
+
+                <br>
+                <button class="w-100 btn btn-outline-warning" type="submit" name='login'>Login</button>
+            </form>
+
+            <!-- se a SESSION já estiver setada, significa que já foi tentado realizar login, e então da um alert de qual foi o erro. -->
+            <!--<?php 
+            if (isset($_GET['error'])) {
+            echo "<br><div class='alert alert-warning'> erro ao fazer login! </div>";
+            }
+            ?>-->
+        </div>
+    </div>
 </main>
 
 {% endblock %}

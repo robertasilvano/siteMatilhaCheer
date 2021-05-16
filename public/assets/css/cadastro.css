@@ -28,8 +28,7 @@
 }
 
 .input-group-text {
-    padding-bottom: 11px;
-    padding-top: 11px;
+    display: block;
 }
 
 .col-md-6{

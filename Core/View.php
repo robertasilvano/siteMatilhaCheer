@@ -23,6 +23,8 @@ class View {
         if ($twig == null) {
             $loader = new \Twig\Loader\FilesystemLoader(dirname(__DIR__) . '/App/Views');
             $twig = new \Twig\Environment($loader);
+            $twig->addGlobal('user_logado', \App\Auth::getUser());
+            $twig->addGlobal('mensagens_flash', \App\Flash::getMensagens());
         }
 
         echo $twig->render($template, $args);

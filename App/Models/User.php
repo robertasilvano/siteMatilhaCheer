@@ -9,7 +9,7 @@ class User extends \Core\Model {
 
     public $errors = [];
 
-    public function __construct($data) {
+    public function __construct($data = []) {
         foreach ($data as $key => $value) {
             $this->$key = $value;
         }
@@ -70,18 +70,52 @@ class User extends \Core\Model {
         }
 
         //trata user
+        if (static::findByUser($this->user) !== false) {
+            $this->errors[] = 'User já em uso';
+        }
 
+    }
+    
+    public static function findByUser($user) {
+        
         $sql = 'SELECT * FROM atletas WHERE user = :user';
 
         $db = static::getConexaoBD();
         $smtm = $db->prepare($sql);
-        $smtm->bindParam(':user', $this->user, PDO::PARAM_STR);
+        $smtm->bindParam(':user', $user, PDO::PARAM_STR);
+
+        $smtm->setFetchMode(PDO::FETCH_CLASS, get_called_class());
 
         $smtm->execute();
 
-        if ($smtm->fetch() !== false) {
-            $this->errors[] = 'User já em uso';
+        return $smtm->fetch(); 
+    }
+
+    public static function findByID($id) {
+        
+        $sql = 'SELECT * FROM atletas WHERE id = :id';
+
+        $db = static::getConexaoBD();
+        $smtm = $db->prepare($sql);
+        $smtm->bindParam(':id', $id, PDO::PARAM_INT);
+
+        $smtm->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
+        $smtm->execute();
+
+        return $smtm->fetch(); 
+    }
+
+
+    public static function autenticar($user, $pass) {
+        $usuario = static::findByUser($user);
+
+        if ($usuario) {
+            if (password_verify($pass, $usuario->pass)) {
+                return $usuario;
+            }
         }
+        return false;
     }
 }
 

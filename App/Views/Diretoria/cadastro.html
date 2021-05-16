@@ -16,6 +16,13 @@ Matilha Cheer
     <!--<?php 
         include 'validacao_atletas.php';
     ?>-->
+
+    {% if user.diretoria == 1 %}
+        {% set dir = 'checked' %}
+    {% else %}
+        {% set dir = '' %}
+    {% endif %}
+    
         <div class="row">
             <div class="container-cadastro">
                 <form  method="post" action="/diretoria/cadastrar" class="form-cadastro">
@@ -24,7 +31,7 @@ Matilha Cheer
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="nome" class="visually-hidden">Nome</label>
-                                <input type="text" id="nome" name="nome" class="form-control" placeholder="Nome" autofocus required>
+                                <input type="text" id="nome" name="nome" class="form-control" placeholder="Nome" value = "{{ user.nome }}" autofocus required>
                             </div>
                             <div class="form-group">
                                 <label for="user" class="visually-hidden">Username</label>
@@ -32,41 +39,41 @@ Matilha Cheer
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input class="form-control" type="password" id="pass" name="pass" placeholder="Password" required>
+                                    <input class="form-control" type="password" id="pass" name="pass" placeholder="Password" value = "{{ user.pass }}" required>
                                         <div class="input-group-append">
-                                            <button class="input-group-text" onclick="pass_eye()" id='olho'>
+                                            <span class="input-group-text" id='olho' name='olho'>
                                                 <i class="far fa-eye"></i>
-                                        </button>
+                                            </span>
                                         </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="nascimento" class="visually-hidden">Nascimento</label>
-                                <input type="date" id="nascimento" name="nascimento" class="form-control" placeholder="Nascimento" required>
+                                <input type="date" id="nascimento" name="nascimento" class="form-control" placeholder="Nascimento" value = "{{ user.nascimento }}" required>
                             </div>
                         </div>
                         
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="telefone" class="visually-hidden">Telefone</label>
-                                <input type="tel" id="telefone" name="telefone" class="form-control" placeholder="Telefone: 11111111111" pattern="[0-9]{11}" required>
+                                <input type="tel" id="telefone" name="telefone" class="form-control" placeholder="Telefone: 11111111111" pattern="[0-9]{11}" value = "{{ user.telefone }}" required>
                             </div>
                             <div class="form-group">
                                 <label for="convenio" class="visually-hidden">Convênio</label>
-                                <input type="text" id="convenio" name="convenio" class="form-control" placeholder="Convênio">
+                                <input type="text" id="convenio" name="convenio" class="form-control" placeholder="Convênio" value = "{{ user.convenio }}"> 
                             </div>
                             <div class="form-group">
                                 <label for="tipo_sangue" class="visually-hidden">Tipo sanguíneo</label>
-                                <input type="text" id="tipo_sangue" name="tipo_sangue" class="form-control" placeholder="Tipo sanguíneo" required>
+                                <input type="text" id="tipo_sangue" name="tipo_sangue" class="form-control" placeholder="Tipo sanguíneo" value = "{{ user.tipo_sangue}}" required>
                             </div>
                             <div class="form-group">
                                 <label for="cpf" class="visually-hidden">CPF</label>
-                                <input type="text" id="cpf" name="cpf" class="form-control" placeholder="CPF: 11111111111" pattern="[0-9]{11}" required>
+                                <input type="text" id="cpf" name="cpf" class="form-control" placeholder="CPF: 11111111111" pattern="[0-9]{11}" value = "{{ user.cpf }}" required>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="checkbox" id="diretoria" name="diretoria">
+                        <input type="checkbox" id="diretoria" name="diretoria" {{ dir }}>
                         <label for="diretoria"><strong>Membro da diretoria</strong></label>
                     </div>
                     
@@ -171,30 +178,5 @@ Matilha Cheer
         </div>
       
    </main>
-
-{% endblock %}
-
-{% block script %}
-   <script>
-
-       function pass_eye() {
-            var pass = $('#pass');
-            var olho = $('#olho');
-
-            olho.mousedown(function() {
-                pass.attr("type", "text");
-            });
-
-            olho.mouseup(function() {
-                pass.attr("type", "password");
-            });
-
-            olho.mouseout(function() {
-                pass.attr("type", "password");
-            });
-            
-       }
-   </script>
-
 
 {% endblock %}
