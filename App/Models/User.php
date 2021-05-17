@@ -176,6 +176,19 @@ class User extends \Core\Model {
 
         return false;
     }
+
+    public function delete($user_atual) {
+
+        $sql = 'DELETE FROM atletas WHERE id=:id';
+            
+        $db = static::getConexaoBD();
+            
+        $smtm = $db->prepare($sql);
+
+        $smtm->bindValue(':id', $user_atual->id, PDO::PARAM_INT);
+            
+        return $smtm->execute();
+    }
 }
 
 ?>

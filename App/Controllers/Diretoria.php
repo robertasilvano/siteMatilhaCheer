@@ -59,6 +59,22 @@ class Diretoria extends \Core\Controller {
            View::renderTemplate('Diretoria/update.html', ['user' => $user]);
        }
    }
+
+   public function deleteAction() {
+       
+       $id = Auth::getIDByURL();
+
+        $user = new User($_POST);
+        $user->id = $id;
+
+       if ($user->delete($user)) {
+           Flash::addMensagens('Delete realizado com sucesso!');
+        }
+        else {
+            Flash::addMensagens('Erro ao fazer alteração!');
+        }
+        $this->redirecionar('/diretoria/cadastro');
+   }
 }
 
 ?>

@@ -136,7 +136,7 @@ Matilha Cheer
                             {% endfor %}
                             <td>
                                 <a class='btn btn-outline-warning btn-sm' href='/diretoria/update/{{atleta.id}}'>Update</a>
-                                <a class='btn btn-outline-warning btn-sm' href='#'>Delete</a>
+                                <a class='btn btn-outline-warning btn-sm' href='/diretoria/delete/{{atleta.id}}' onclick="return confirm('Are you sure?');">Delete</a>
                             </td>
                             </tr>
                         {% endfor %}
