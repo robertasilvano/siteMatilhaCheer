@@ -36,7 +36,9 @@ class Diretoria extends \Core\Controller {
    }
 
    public function sucessoAction() {
-        View::renderTemplate('Diretoria/cadastro.html', ['sucesso' => 1]);
+        $atletas = User::selectAll();
+
+        View::renderTemplate('Diretoria/cadastro.html', ['sucesso' => 1, 'atletas' => $atletas]);
    }
 
    public function updateAction() {
@@ -64,10 +66,14 @@ class Diretoria extends \Core\Controller {
        
        $id = Auth::getIDByURL();
 
-        $user = new User($_POST);
-        $user->id = $id;
+        $user = Auth::getUserByID($id);
 
-       if ($user->delete($user)) {
+        var_dump($user);
+
+       if ($user->user == 'admin') {
+            Flash::addMensagens('Não é possível deleter o admin!');
+       }
+        else if ($user->delete($user)) {
            Flash::addMensagens('Delete realizado com sucesso!');
         }
         else {

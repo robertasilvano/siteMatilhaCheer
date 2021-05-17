@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}
+Matilha Cheer
+{% endblock %}
+
+{% block styles %}
+<link href="/assets/css/atletas.css" rel="stylesheet">
+{% endblock %}
+    
+{% block body %}
+<main class="text-center">
+    <div class="row">
+
+          <div class="row justify-content-center">
+              <h2>Insira aqui a sua falta. 😥 </h2>
+          </div>
+          <br>
+          <br>
+          <br>
+
+          <div class="row">
+            <div class="container-faltas">
+                <form method="post" action="/atletas/nova-falta" class="form-faltas" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="data" class="visually-hidden">Data</label>
+                        <input type="date" id="data" name="data" class="form-control" placeholder="Data" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="justificativa" class="visually-hidden">Justificativa</label>
+                        <input type="text" id="justificativa" name="justificativa" class="form-control" placeholder="Justificativa" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="arquivo" class="visually-hidden">Arquivo</label>
+                        <input type="file" id="arquivo" name="arquivo" class="form-control" placeholder="arquivo">
+                    </div>
+    
+                    <br>
+                    <button class="w-100 btn btn-outline-warning" type="submit" name='login'>Login</button>
+                </form>
+    
+</main>
+
+{% endblock %}

@@ -11,8 +11,6 @@ Login
 {% block body %}
 <main class="text-center">
 
-    <!-- verifica se já está logado. se sim, vai direto pra página de atletas. se não, aparece o formulário de login. -->
-    <!--<?php include 'validacao_logado.php';?>-->
     <div class="row">
         <div class="container-login">
             <form method="post" action="/login/novo" class="form-login">
@@ -36,12 +34,6 @@ Login
                 <button class="w-100 btn btn-outline-warning" type="submit" name='login'>Login</button>
             </form>
 
-            <!-- se a SESSION já estiver setada, significa que já foi tentado realizar login, e então da um alert de qual foi o erro. -->
-            <!--<?php 
-            if (isset($_GET['error'])) {
-            echo "<br><div class='alert alert-warning'> erro ao fazer login! </div>";
-            }
-            ?>-->
         </div>
     </div>
 </main>

@@ -15,5 +15,25 @@ class Atletas extends \Core\Controller {
         View::renderTemplate('Atletas/index.html');
     }
 
+    public function faltasAction() {
+        View::renderTemplate('Atletas/faltas.html');
+    }
+
+    public function novaFaltaAction() {
+
+        $this->trataArquivo();
+
+        $diretorio = "uploads/";
+        $arquivo = $diretorio . basename($_FILES["arquivo"]["name"]);
+        $uploadOK = 1;
+
+        $ext = strtolower(pathinfo($arquivo, PATHINFO_EXTENSION));
+
+        $check = getimagesize($_FILES["arquivo"]["tmp_name"]);
+        
+        
+        //$this->redirecionar('/atletas');
+    }
+
 }
 ?>

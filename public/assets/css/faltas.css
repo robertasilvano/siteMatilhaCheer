@@ -1,0 +1,40 @@
+body {
+  background-image: url("/assets/imgs/matilha_opaco.jpg");
+  background-size: cover;
+  background-repeat: repeat-y;
+}
+
+.container-faltas {
+  padding-left: 30%;
+  padding-right: 30%;
+}
+
+.form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 8px;
+  font-size: 16px;
+  margin-top: 8px;
+}
+
+.form-control:focus {
+    z-index: 2;
+  }
+
+ .input-group-append {
+    position: relative;
+    box-sizing: border-box;
+    font-size: 16px;
+    margin-top: 8px;
+}
+
+.input-group {
+  align-items: center;
+}
+
+.input-group-text {
+  display: block;
+}
+
+
