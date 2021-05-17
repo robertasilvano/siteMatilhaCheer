@@ -36,6 +36,22 @@ class Auth {
             return User::findByID($_SESSION['user_id']);
         }
     }
+
+    public static function salvarPaginaRetorno() {
+
+        $_SESSION['pagina'] = $_SERVER['REQUEST_URI'];
+    }
+
+    public static function getPaginaRetorno() {
+        return $_SESSION['pagina'] ?? '/atletas/index';
+    }
+
+    public static function getDiretoria() {
+        $user = Auth::getUser();
+
+        if ($user->diretoria == 1) return true;
+        else return false;
+    }
 }
 
 ?>

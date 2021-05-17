@@ -8,8 +8,8 @@ use \App\Flash;
 use \Core\View;
 
 class Login extends \Core\Controller {
+    
     public function indexAction() {
-
         View::renderTemplate('Login/index.html');
     }
 
@@ -22,9 +22,10 @@ class Login extends \Core\Controller {
 
             Flash::addMensagens("Usuário logado com sucesso!");
 
-            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/atletas', true, 303);
-            exit;
+            $this->redirecionar(Auth::getPaginaRetorno());
+
         }
+
         else {
             Flash::addMensagens("Problema ao fazer login!");
             View::renderTemplate('Login/index.html', ['user' => $_POST['user']]);
@@ -35,16 +36,14 @@ class Login extends \Core\Controller {
         
         Auth::logout();
 
-        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/login/msg-logout', true, 303);
+        $this->redirecionar('/login/msg-logout');
         
     }
 
     public function msgLogoutAction() {
         Flash::addMensagens("Logout com sucesso!");
 
-        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/login/index', true, 303);
-        exit;
-        
+        $this->redirecionar('/login/index');        
     }
 
     protected function anterior() {

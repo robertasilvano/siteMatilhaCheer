@@ -69,12 +69,43 @@
                     {% endif %}
                     </li>
 
-                    <li class="nav-item">
+                    {% if user_logado %}
+                      <li class="nav-item">
+                        <div class="btn-group">
+                          <a href="/atletas/index" class="nav-link">Atletas</button></a>
+                          <button type="button" class="btn dropdown-toggle dropdown-toggle-split nav-link" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                          </button>
+                          <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Faltas</a></li>
+                            <li><a class="dropdown-item" href="#">Financeiro</a></li>
+                          </ul>
+                        </div>
+                      </li>
+                    {% else %}
+                      <li class="nav-item">
                         <a class="nav-link" href="/atletas/index">Atletas</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="/diretoria/index">Diretoria</a>
-                  </li>
+                      </li>
+                    {% endif %}
+
+                    {% if user_logado.diretoria == 1 %}
+                      <li class="nav-item">
+                        <div class="btn-group">
+                          <a href="/diretoria/index" class="nav-link">Diretoria</button></a>
+                          <button type="button" class="btn dropdown-toggle dropdown-toggle-split nav-link" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                          </button>
+                          <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/diretoria/cadastro">Cadastro</a></li>
+                            <li><a class="dropdown-item" href="#">Pautas</a></li>
+                          </ul>
+                        </div>
+                      </li>
+                    {% else %}
+                      <li class="nav-item">
+                        <a class="nav-link" href="/diretoria/index">Diretoria</a>
+                      </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

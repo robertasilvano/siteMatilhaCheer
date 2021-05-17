@@ -12,16 +12,13 @@ Matilha Cheer
 
 <main class="text-center">
 
-    <!-- só tem acesso a essa página quem é atleta, então é necessário fazer a validação. Se não estiver logado, vai pra página de login. -->
-    <!--<?php 
-        include 'validacao_atletas.php';
-    ?>-->
-
     {% if user.diretoria == 1 %}
         {% set dir = 'checked' %}
     {% else %}
         {% set dir = '' %}
     {% endif %}
+
+    <a href="/diretoria/update">Update</a>
     
         <div class="row">
             <div class="container-cadastro">

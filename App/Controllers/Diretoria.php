@@ -2,18 +2,23 @@
 
 namespace App\Controllers;
 
+use App\Auth;
+use App\Flash;
 use App\Models\User;
 use \Core\View;
 
 class Diretoria extends \Core\Controller {
 
-    public function indexAction() {
+    protected function anterior() {
+        $this->loginObrigatorio();
+        $this->loginDiretoria();
+    }
 
+    public function indexAction() {
         View::renderTemplate('Diretoria/index.html');
     }
 
    public function cadastroAction() {
-
         View::renderTemplate('Diretoria/cadastro.html');
    }
 
@@ -21,8 +26,7 @@ class Diretoria extends \Core\Controller {
        $user = new User($_POST);
        
        if ($user->insert()) {
-            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/diretoria/sucesso', true, 303);
-            exit;
+           $this->redirecionar('/diretoria/sucesso');
        }
        else {
             View::renderTemplate('Diretoria/cadastro.html', ['user' => $user]);
@@ -30,16 +34,25 @@ class Diretoria extends \Core\Controller {
    }
 
    public function sucessoAction() {
-       
         View::renderTemplate('Diretoria/cadastro.html', ['sucesso' => 1]);
    }
 
-    protected function anterior() {
-        //echo "(ANTERIOR) ";
-    }
+   public function updateAction() {
+        View::renderTemplate('Diretoria/update.html', ['user' => Auth::getUser()]);
+   }
 
-    protected function posterior() {
-        //echo "(POSTERIOR) ";
-    }
+   public function alterarAction() {
+       $user = new User($_POST);
+
+       if ($user->update()) {
+           Flash::addMensagens('Alteração realizada com sucesso!');
+           $this->redirecionar('/diretoria/cadastro');
+       }
+       else {
+           Flash::addMensagens('Erro ao fazer alteração!');
+           View::renderTemplate('Diretoria/update.html', ['user' => $user]);
+       }
+   }
 }
+
 ?>

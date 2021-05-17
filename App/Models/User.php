@@ -4,6 +4,7 @@ namespace App\Models;
 
 use PDO;
 use PDOException;
+use \App\Auth;
 
 class User extends \Core\Model {
 
@@ -33,6 +34,7 @@ class User extends \Core\Model {
 
         $this->validate();
 
+        
         if (empty($this->errors)) {
             $pass_hash = password_hash($this->pass, PASSWORD_DEFAULT);
 
@@ -115,6 +117,65 @@ class User extends \Core\Model {
                 return $usuario;
             }
         }
+        return false;
+    }
+
+    public function validateUpdate($user_atual) {
+
+        //trata a diretoria
+        if (isset($this->diretoria)) {
+            $this->diretoria = 1;
+        }
+        else {
+            $this->diretoria = 0;
+        }
+
+        //trata user
+        if ($this->user != $user_atual->user) {
+            if (static::findByUser($this->user)) {
+                $this->errors[] = 'User já em uso';
+            }
+        }
+
+    }
+
+    public function update() {
+
+        $user_atual = Auth::getUser();
+        $this->validateUpdate($user_atual);
+        
+        if (empty($this->errors)) {
+
+            if(isset($this->pass)) {            
+                $sql = 'UPDATE atletas set nome=:nome, user=:user, pass=:pass, nascimento=:nascimento, telefone=:telefone, convenio=:convenio, tipo_sangue=:tipo_sangue, cpf=:cpf, diretoria=:diretoria WHERE id=:id';
+            }
+            else {
+                $sql = 'UPDATE atletas set nome=:nome, user=:user, nascimento=:nascimento, telefone=:telefone, convenio=:convenio, tipo_sangue=:tipo_sangue, cpf=:cpf, diretoria=:diretoria WHERE id=:id';
+            }
+            
+            $db = static::getConexaoBD();
+            
+            $smtm = $db->prepare($sql);
+
+            $smtm->bindValue(':id', $user_atual->id, PDO::PARAM_INT);
+            $smtm->bindValue(':nome', $this->nome, PDO::PARAM_STR);
+            $smtm->bindValue(':user', $this->user, PDO::PARAM_STR);
+            $smtm->bindValue(':nascimento', $this->nascimento, PDO::PARAM_STR);
+            $smtm->bindValue(':telefone', $this->telefone, PDO::PARAM_STR);
+            $smtm->bindValue(':convenio', $this->convenio, PDO::PARAM_STR);
+            $smtm->bindValue(':tipo_sangue', $this->tipo_sangue, PDO::PARAM_STR);
+            $smtm->bindValue(':cpf', $this->cpf, PDO::PARAM_STR);
+            $smtm->bindValue(':diretoria', $this->diretoria, PDO::PARAM_STR);
+
+            if(isset($this->pass)) {
+                $pass_hash = password_hash($this->pass, PASSWORD_DEFAULT);
+                $smtm->bindValue(':pass', $pass_hash, PDO::PARAM_STR);
+            }
+            
+            return $smtm->execute();
+
+        }
+
         return false;
     }
 }
