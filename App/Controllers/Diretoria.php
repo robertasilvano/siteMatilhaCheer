@@ -2,9 +2,9 @@
 
 namespace App\Controllers;
 
+use App\Models\User;
 use App\Auth;
 use App\Flash;
-use App\Models\User;
 use \Core\View;
 
 class Diretoria extends \Core\Controller {

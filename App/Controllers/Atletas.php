@@ -2,9 +2,8 @@
 
 namespace App\Controllers;
 
-use App\Models\User;
-use \Core\View;
 use App\Models\Falta;
+use \Core\View;
 use App\Flash;
 use App\Auth;
 
@@ -19,7 +18,7 @@ class Atletas extends \Core\Controller {
     }
 
     public function faltasAction() {
-        $faltas = Falta::selectAllByUser();
+        $faltas = Falta::selectAllByIDAtleta();
 
         View::renderTemplate('Atletas/faltas.html', ['faltas' => $faltas, 'nome' => $_SESSION['user_nome']]);
     }
@@ -37,7 +36,7 @@ class Atletas extends \Core\Controller {
         }
 
         Flash::addMensagens('Erro ao inserir falta!');
-        $faltas = Falta::selectAllByUser();
+        $faltas = Falta::selectAllByIDAtleta();
         View::renderTemplate('Atletas/faltas.html', ['falta' => $falta, 'faltas' => $faltas]);
     }
 
@@ -60,7 +59,8 @@ class Atletas extends \Core\Controller {
             $this->redirecionar('/atletas/faltas');
         }
     }
-    
+
+    $falta->deletaArquivo();
     Flash::addMensagens('Erro ao fazer alteração!');
     View::renderTemplate('Atletas/update.html', ['falta' => $falta]);
 }

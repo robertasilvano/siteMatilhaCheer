@@ -2,9 +2,8 @@
 
 namespace App\Models;
 
+use App\Auth;
 use PDO;
-use PDOException;
-use \App\Auth;
 use \App\Flash;
 
 class Falta extends \Core\Model {
@@ -66,7 +65,21 @@ class Falta extends \Core\Model {
         }
     }
 
-    public static function selectAllByUser() {
+    public function deletaArquivo() {
+
+        if ($_FILES["arquivo"]["tmp_name"]) {
+
+            $diretorio = "uploads/";
+            $arquivo = $diretorio . basename($_FILES["arquivo"]["name"]);
+
+            if (file_exists($arquivo)) {
+                unlink($arquivo);
+            }
+        }
+    }
+
+
+    public static function selectAllByIDAtleta() {
         $sql = 'SELECT * FROM faltas WHERE id_atleta=:id';
 
         $db = static::getConexaoBD();
@@ -97,20 +110,43 @@ class Falta extends \Core\Model {
 
         return $smtm->execute();
     }
-    
-    public static function findByUser($user) {
-        
-        $sql = 'SELECT * FROM atletas WHERE user = :user';
+
+    public function update($falta) {
+            
+        if(isset($falta->arquivo)) {            
+            $sql = 'UPDATE faltas set data=:data, justificativa=:justificativa, arquivo=:arquivo WHERE id=:id';
+        }
+        else {
+            $sql = 'UPDATE faltas set data=:data, justificativa=:justificativa WHERE id=:id';
+        }
 
         $db = static::getConexaoBD();
+        
         $smtm = $db->prepare($sql);
-        $smtm->bindParam(':user', $user, PDO::PARAM_STR);
 
-        $smtm->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        $smtm->bindValue(':data', $falta->data, PDO::PARAM_STR);
+        $smtm->bindValue(':justificativa', $falta->justificativa, PDO::PARAM_STR);
+        $smtm->bindValue(':id', $falta->id, PDO::PARAM_INT);
 
-        $smtm->execute();
+        if(isset($falta->arquivo)) {
+            $smtm->bindValue(':arquivo', $falta->arquivo, PDO::PARAM_STR);
+        }
 
-        return $smtm->fetch(); 
+        return $smtm->execute();
+
+    }
+
+    public function delete($falta_atual) {
+
+        $sql = 'DELETE FROM faltas WHERE id=:id';
+            
+        $db = static::getConexaoBD();
+            
+        $smtm = $db->prepare($sql);
+
+        $smtm->bindValue(':id', $falta_atual->id, PDO::PARAM_INT);
+            
+        return $smtm->execute();
     }
 
     public static function findByID($id) {
@@ -126,63 +162,6 @@ class Falta extends \Core\Model {
         $smtm->execute();
 
         return $smtm->fetch(); 
-    }
-
-    public static function autenticar($user, $pass) {
-        $usuario = static::findByUser($user);
-
-        if ($usuario) {
-            if (password_verify($pass, $usuario->pass)) {
-                return $usuario;
-            }
-        }
-        return false;
-    }
-
-    public function update($falta) {
-
-        //$falta_atual = Auth::getFaltaByID($falta->id);
-
-        
-        if (empty($falta->errors)) {
-            
-            if(isset($falta->arquivo)) {            
-                $sql = 'UPDATE faltas set data=:data, justificativa=:justificativa, arquivo=:arquivo WHERE id=:id';
-            }
-            else {
-                $sql = 'UPDATE faltas set data=:data, justificativa=:justificativa WHERE id=:id';
-            }
-
-            $db = static::getConexaoBD();
-            
-            $smtm = $db->prepare($sql);
-
-            $smtm->bindValue(':data', $falta->data, PDO::PARAM_STR);
-            $smtm->bindValue(':justificativa', $falta->justificativa, PDO::PARAM_STR);
-            $smtm->bindValue(':id', $falta->id, PDO::PARAM_INT);
-
-            if(isset($falta->arquivo)) {
-                $smtm->bindValue(':arquivo', $falta->arquivo, PDO::PARAM_STR);
-            }
-
-           return $smtm->execute();
-
-        }
-
-        return false;
-    }
-
-    public function delete($falta_atual) {
-
-        $sql = 'DELETE FROM faltas WHERE id=:id';
-            
-        $db = static::getConexaoBD();
-            
-        $smtm = $db->prepare($sql);
-
-        $smtm->bindValue(':id', $falta_atual->id, PDO::PARAM_INT);
-            
-        return $smtm->execute();
     }
 }
 

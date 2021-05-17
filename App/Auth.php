@@ -9,8 +9,6 @@ class Auth {
 
     public static function login($user) {
 
-        //session_generate_id(true);
-
         $_SESSION['user_nome'] = $user->nome;
         $_SESSION['user_id'] = $user->id;
         

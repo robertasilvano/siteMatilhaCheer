@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use App\Auth;
 use PDO;
 use PDOException;
-use \App\Auth;
 use App\Flash;
 
 class User extends \Core\Model {
@@ -118,20 +118,20 @@ class User extends \Core\Model {
         return false;
     }
 
-    public function validateUpdate($user) {
+    public function validateUpdate($user_atual) {
 
         //trata a diretoria
-        if (isset($user->diretoria)) {
-            $user->diretoria = 1;
+        if (isset($this->diretoria)) {
+            $this->diretoria = 1;
         }
         else {
-            $user->diretoria = 0;
+            $this->diretoria = 0;
         }
 
         //trata user
-        if ($user->user != $this->user) {
-            if (static::findByUser($user->user)) {
-                $user->errors[] = 'User já em uso';
+        if ($this->user != $user_atual->user) {
+            if (static::findByUser($this->user)) {
+                Flash::addMensagens('User já em uso!');
             }
         }
 
@@ -139,19 +139,19 @@ class User extends \Core\Model {
 
     public function update($user) {
 
-        $this->validateUpdate($user);
+        $user_atual = Auth::getUserByID($user->id);
 
-        //$user_atual = Auth::getUserByID($user->id);
+        $this->validateUpdate($user_atual);
         
-        if (empty($user->errors)) {
-
+        if (!isset($_SESSION['flash_notificacoes'])) {
+            
             if(isset($user->pass)) {            
                 $sql = 'UPDATE atletas set nome=:nome, user=:user, pass=:pass, nascimento=:nascimento, telefone=:telefone, convenio=:convenio, tipo_sangue=:tipo_sangue, cpf=:cpf, diretoria=:diretoria WHERE id=:id';
             }
             else {
                 $sql = 'UPDATE atletas set nome=:nome, user=:user, nascimento=:nascimento, telefone=:telefone, convenio=:convenio, tipo_sangue=:tipo_sangue, cpf=:cpf, diretoria=:diretoria WHERE id=:id';
             }
-            
+
             $db = static::getConexaoBD();
             
             $smtm = $db->prepare($sql);

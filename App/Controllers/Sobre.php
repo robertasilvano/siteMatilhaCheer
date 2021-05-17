@@ -9,14 +9,6 @@ class Sobre extends \Core\Controller {
 
         View::renderTemplate('Sobre/index.html');
     }
-
-    protected function anterior() {
-        //echo "(ANTERIOR) ";
-    }
-
-    protected function posterior() {
-        //echo "(POSTERIOR) ";
-    }
 }
 
 
