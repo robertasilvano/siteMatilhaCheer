@@ -36,6 +36,16 @@ class Auth {
             return User::findByID($_SESSION['user_id']);
         }
     }
+    
+    public static function getIDByURL() {
+        return explode('/', $_SERVER['REQUEST_URI'])[3];
+    }
+
+    public static function getUserByID() {
+        
+        $id = Auth::getIDByURL();
+        return User::findByID($id);
+    }
 
     public static function salvarPaginaRetorno() {
 

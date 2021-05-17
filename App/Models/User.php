@@ -108,7 +108,6 @@ class User extends \Core\Model {
         return $smtm->fetch(); 
     }
 
-
     public static function autenticar($user, $pass) {
         $usuario = static::findByUser($user);
 
@@ -139,9 +138,8 @@ class User extends \Core\Model {
 
     }
 
-    public function update() {
+    public function update($user_atual) {
 
-        $user_atual = Auth::getUser();
         $this->validateUpdate($user_atual);
         
         if (empty($this->errors)) {

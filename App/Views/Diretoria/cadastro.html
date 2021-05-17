@@ -17,8 +17,6 @@ Matilha Cheer
     {% else %}
         {% set dir = '' %}
     {% endif %}
-
-    <a href="/diretoria/update">Update</a>
     
         <div class="row">
             <div class="container-cadastro">
@@ -89,40 +87,6 @@ Matilha Cheer
                     <br><div class='alert alert-warning'> Atleta cadastrado com sucesso! </div>
                 {% endif %}
 
-                <!--<?php 
-
-                        //update
-                        if(isset($_GET['id_up'])){
-                            echo "<script> location.href = 'update?id_up=".$_GET['id_up'].".php' </script>";
-                        }
-
-                        if(isset($_SESSION['update'])){
-                            if ($_SESSION['update'] == 'update_ok'){
-                                echo "<br><div class='alert alert-warning'> Update realizado com sucesso! </div>";
-                            }
-                            else if ($_SESSION['update'] == 'update_erro') {
-                                echo "<br><div class='alert alert-warning'> Erro ao realizar update! </div>";
-                            }
-                            $_SESSION['update'] = '';
-                        }
-
-                        //delete
-                        if(isset($_GET['id_del'])) {
-                            echo "<script> location.href = 'delete?id_del=".$_GET['id_del'].".php' </script>";
-                        }
-
-                        if(isset($_SESSION['delete'])){
-                            if ($_SESSION['delete'] == 'delete_ok'){
-                                echo "<br><div class='alert alert-warning'> Delete realizado com sucesso! </div>";
-                            }
-                            else if ($_SESSION['delete'] == 'delete_erro') {
-                                echo "<br><div class='alert alert-warning'> Erro ao realizar delete! </div>";
-                            }
-                            $_SESSION['delete'] = '';
-                        }
-
-
-                ?>-->
             </div>
         </div>
 
@@ -132,19 +96,12 @@ Matilha Cheer
             <div class="container-tabela">
             <h1 class="h3 mb-3 fw-bold">Atletas cadastrados</h1>
 
-            <!--<?php 
-                include 'tabela_atletas.php';
-                $select = $atleta->select();         
-                
-                if($select) {
-            ?>-->
-
+            {% if atletas is not empty %}
                 <table class="table table-dark table-bordered table-hover">
                     <thead>
                         <tr>
                             <th>Nome</th>
                             <th>User</th>
-                            <th>Password</th>
                             <th>Nascimento</th>
                             <th>Telefone</th>
                             <th>Convênio</th>
@@ -156,20 +113,46 @@ Matilha Cheer
                     </thead>
     
                     <tbody>
-                        <!--<?php 
-                            $atleta->printar_tabela($select);
-                        ?>-->
+
+
+                        {% for atleta in atletas %}
+                            <tr>
+                            {% for column in atleta %}
+                                {% if loop.index != 1 and loop.index != 4 and loop.index != 10 %}
+                                    <td>
+                                    {{ column }}
+                                    </td>
+                                {% elseif loop.index == 10 %}
+                                    {% if column == 1 %}
+                                        <td>
+                                        {{ 'Sim' }}
+                                        </td>
+                                    {% else %}
+                                        <td>
+                                        {{ 'Não' }}
+                                        </td>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                            <td>
+                                <a class='btn btn-outline-warning btn-sm' href='/diretoria/update/{{atleta.id}}'>Update</a>
+                                <a class='btn btn-outline-warning btn-sm' href='#'>Delete</a>
+                            </td>
+                            </tr>
+                        {% endfor %}
+
+                        
+                        <!--<a class='btn btn-outline-warning btn-sm' href='cadastro.php?id_del=". $atletas[$i]['id'] . "'>Excluir</a><a class='btn btn-outline-warning btn-sm' href='cadastro.php?id_up=". $atletas[$i]['id'] . "'>Editar</a></td>";
+                            echo "</tr>";
+                        }-->
+
                     </tbody>
     
                 </table>
-
-                <!--<?php 
-                }
-                else {
-                    echo "<br><div class='alert alert-warning'>Ainda não há atletas cadastrados!</div>";
-                }
-                ?>-->
-
+                
+            {% else %}
+                <br><div class='alert alert-warning'>Ainda não há atletas cadastrados!</div>
+            {% endif %}
 
             </div>
         </div>

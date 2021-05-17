@@ -19,7 +19,9 @@ class Diretoria extends \Core\Controller {
     }
 
    public function cadastroAction() {
-        View::renderTemplate('Diretoria/cadastro.html');
+       $atletas = User::selectAll();
+
+        View::renderTemplate('Diretoria/cadastro.html', ['atletas' => $atletas]);
    }
 
    public function cadastrarAction() {
@@ -38,13 +40,17 @@ class Diretoria extends \Core\Controller {
    }
 
    public function updateAction() {
-        View::renderTemplate('Diretoria/update.html', ['user' => Auth::getUser()]);
+        View::renderTemplate('Diretoria/update.html', ['user' => Auth::getUserByID()]);
    }
 
    public function alterarAction() {
-       $user = new User($_POST);
+       
+       $id = Auth::getIDByURL();
 
-       if ($user->update()) {
+        $user = new User($_POST);
+        $user->id = $id;
+
+       if ($user->update($user)) {
            Flash::addMensagens('Alteração realizada com sucesso!');
            $this->redirecionar('/diretoria/cadastro');
        }
