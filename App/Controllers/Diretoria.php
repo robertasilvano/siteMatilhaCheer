@@ -19,26 +19,24 @@ class Diretoria extends \Core\Controller {
     }
 
    public function cadastroAction() {
-       $atletas = User::selectAll();
-
-        View::renderTemplate('Diretoria/cadastro.html', ['atletas' => $atletas]);
-   }
-
-   public function cadastrarAction() {
+       $users = User::selectAll();
+       
+       View::renderTemplate('Diretoria/cadastro.html', ['users' => $users]);
+    }
+    
+    public function cadastrarAction() {
        $user = new User($_POST);
        
        if ($user->insert()) {
-           $this->redirecionar('/diretoria/sucesso');
+           Flash::addMensagens('Atleta cadastrado com sucesso!');
+           $this->redirecionar('/diretoria/cadastro');
        }
        else {
-            View::renderTemplate('Diretoria/cadastro.html', ['user' => $user]);
+            Flash::addMensagens('Erro ao cadastrar atleta!');
+           $users = User::selectAll();
+           
+            View::renderTemplate('Diretoria/cadastro.html', ['user' => $user, 'users' => $users]);
        }
-   }
-
-   public function sucessoAction() {
-        $atletas = User::selectAll();
-
-        View::renderTemplate('Diretoria/cadastro.html', ['sucesso' => 1, 'atletas' => $atletas]);
    }
 
    public function updateAction() {

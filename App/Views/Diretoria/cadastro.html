@@ -17,7 +17,7 @@ Matilha Cheer
     {% else %}
         {% set dir = '' %}
     {% endif %}
-    
+
         <div class="row">
             <div class="container-cadastro">
                 <form  method="post" action="/diretoria/cadastrar" class="form-cadastro">
@@ -26,7 +26,7 @@ Matilha Cheer
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="nome" class="visually-hidden">Nome</label>
-                                <input type="text" id="nome" name="nome" class="form-control" placeholder="Nome" value = "{{ user.nome }}" autofocus required>
+                                <input type="text" id="nome" name="nome" class="form-control" placeholder="Nome" value="{{ user.nome }}" autofocus required>
                             </div>
                             <div class="form-group">
                                 <label for="user" class="visually-hidden">Username</label>
@@ -75,18 +75,6 @@ Matilha Cheer
                     <button class="w-100 btn btn-outline-warning" type="submit" name='cadastrar'>Cadastrar</button>
                 </form>
 
-                <!-- CADASTRO DE USUÁRIOS -->                
-                {% if user.errors is not empty %}
-                    {% for error in user.errors %}
-                        <br><div class='alert alert-warning'> {{ error }}</div>
-                    {% endfor %}
-                    </ul>
-                {% endif %}
-
-                {% if sucesso == 1 %}
-                    <br><div class='alert alert-warning'> Atleta cadastrado com sucesso! </div>
-                {% endif %}
-
             </div>
         </div>
 
@@ -94,9 +82,9 @@ Matilha Cheer
 
         <div class="row">
             <div class="container-tabela">
-            <h1 class="h3 mb-3 fw-bold">Atletas cadastrados</h1>
+                <h1 class="h3 mb-3 fw-bold">Atletas cadastrados</h1>
 
-            {% if atletas is not empty %}
+            {% if users is not empty %}
                 <table class="table table-dark table-bordered table-hover">
                     <thead>
                         <tr>
@@ -114,10 +102,9 @@ Matilha Cheer
     
                     <tbody>
 
-
-                        {% for atleta in atletas %}
+                        {% for user in users %}
                             <tr>
-                            {% for column in atleta %}
+                            {% for column in user %}
                                 {% if loop.index != 1 and loop.index != 4 and loop.index != 10 %}
                                     <td>
                                     {{ column }}
@@ -135,8 +122,8 @@ Matilha Cheer
                                 {% endif %}
                             {% endfor %}
                             <td>
-                                <a class='btn btn-outline-warning btn-sm' href='/diretoria/update/{{atleta.id}}'>Update</a>
-                                <a class='btn btn-outline-warning btn-sm' href='/diretoria/delete/{{atleta.id}}' onclick="return confirm('Are you sure?');">Delete</a>
+                                <a class='btn btn-outline-warning btn-sm' href='/diretoria/update/{{user.id}}'>Update</a>
+                                <a class='btn btn-outline-warning btn-sm' href='/diretoria/delete/{{user.id}}' onclick="return confirm('Are you sure?');">Delete</a>
                             </td>
                             </tr>
                         {% endfor %}

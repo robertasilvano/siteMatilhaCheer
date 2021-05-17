@@ -34,9 +34,10 @@ class Atletas extends \Core\Controller {
                 $this->redirecionar('/atletas/faltas');
             }
         }
-        
 
-        View::renderTemplate('Atletas/faltas.html', ['falta' => $falta]);
+        Flash::addMensagens('Erro ao inserir falta!');
+        $faltas = Falta::selectAllByUser();
+        View::renderTemplate('Atletas/faltas.html', ['falta' => $falta, 'faltas' => $faltas]);
     }
 
 }

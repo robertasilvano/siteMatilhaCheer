@@ -5,6 +5,7 @@ namespace App\Models;
 use PDO;
 use PDOException;
 use \App\Auth;
+use App\Flash;
 
 class User extends \Core\Model {
 
@@ -34,8 +35,7 @@ class User extends \Core\Model {
 
         $this->validate();
 
-        
-        if (empty($this->errors)) {
+        if (!Flash::getMensagens()) {
             $pass_hash = password_hash($this->pass, PASSWORD_DEFAULT);
 
             $sql = 'INSERT INTO atletas (nome, user, pass, nascimento, telefone, convenio, tipo_sangue, cpf, diretoria) VALUES (:nome, :user, :pass, :nascimento, :telefone, :convenio, :tipo_sangue, :cpf, :diretoria)';
@@ -55,7 +55,6 @@ class User extends \Core\Model {
             $smtm->bindValue(':diretoria', $this->diretoria, PDO::PARAM_STR);
 
             return $smtm->execute();
-
         }
 
         return false;
@@ -73,7 +72,7 @@ class User extends \Core\Model {
 
         //trata user
         if (static::findByUser($this->user) !== false) {
-            $this->errors[] = 'User já em uso';
+            Flash::addMensagens("User já em uso!");
         }
 
     }
