@@ -3,6 +3,7 @@
 namespace App;
 
 Use \App\Models\User;
+Use \App\Models\Falta;
 
 class Auth {
 
@@ -45,6 +46,12 @@ class Auth {
         
         $id = Auth::getIDByURL();
         return User::findByID($id);
+    }
+
+    public static function getFaltaByID() {
+        
+        $id = Auth::getIDByURL();
+        return Falta::findByID($id);
     }
 
     public static function salvarPaginaRetorno() {

@@ -141,10 +141,7 @@ class User extends \Core\Model {
 
         $this->validateUpdate($user);
 
-        $user_atual = Auth::getUserByID($user->id);
-
-        var_dump($user);
-        var_dump($user_atual);
+        //$user_atual = Auth::getUserByID($user->id);
         
         if (empty($user->errors)) {
 

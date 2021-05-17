@@ -115,7 +115,7 @@ class Falta extends \Core\Model {
 
     public static function findByID($id) {
         
-        $sql = 'SELECT * FROM atletas WHERE id = :id';
+        $sql = 'SELECT * FROM faltas WHERE id = :id';
 
         $db = static::getConexaoBD();
         $smtm = $db->prepare($sql);
@@ -139,78 +139,48 @@ class Falta extends \Core\Model {
         return false;
     }
 
-    public function validateUpdate($user) {
+    public function update($falta) {
 
-        //trata a diretoria
-        if (isset($user->diretoria)) {
-            $user->diretoria = 1;
-        }
-        else {
-            $user->diretoria = 0;
-        }
+        //$falta_atual = Auth::getFaltaByID($falta->id);
 
-        //trata user
-        if ($user->user != $this->user) {
-            if (static::findByUser($user->user)) {
-                $user->errors[] = 'User já em uso';
-            }
-        }
-
-    }
-
-    public function update($user) {
-
-        $this->validateUpdate($user);
-
-        $user_atual = Auth::getUserByID($user->id);
-
-        var_dump($user);
-        var_dump($user_atual);
         
-        if (empty($user->errors)) {
-
-            if(isset($user->pass)) {            
-                $sql = 'UPDATE atletas set nome=:nome, user=:user, pass=:pass, nascimento=:nascimento, telefone=:telefone, convenio=:convenio, tipo_sangue=:tipo_sangue, cpf=:cpf, diretoria=:diretoria WHERE id=:id';
+        if (empty($falta->errors)) {
+            
+            if(isset($falta->arquivo)) {            
+                $sql = 'UPDATE faltas set data=:data, justificativa=:justificativa, arquivo=:arquivo WHERE id=:id';
             }
             else {
-                $sql = 'UPDATE atletas set nome=:nome, user=:user, nascimento=:nascimento, telefone=:telefone, convenio=:convenio, tipo_sangue=:tipo_sangue, cpf=:cpf, diretoria=:diretoria WHERE id=:id';
+                $sql = 'UPDATE faltas set data=:data, justificativa=:justificativa WHERE id=:id';
             }
-            
+
             $db = static::getConexaoBD();
             
             $smtm = $db->prepare($sql);
 
-            $smtm->bindValue(':id', $user->id, PDO::PARAM_INT);
-            $smtm->bindValue(':nome', $user->nome, PDO::PARAM_STR);
-            $smtm->bindValue(':user', $user->user, PDO::PARAM_STR);
-            $smtm->bindValue(':nascimento', $user->nascimento, PDO::PARAM_STR);
-            $smtm->bindValue(':telefone', $user->telefone, PDO::PARAM_STR);
-            $smtm->bindValue(':convenio', $user->convenio, PDO::PARAM_STR);
-            $smtm->bindValue(':tipo_sangue', $user->tipo_sangue, PDO::PARAM_STR);
-            $smtm->bindValue(':cpf', $user->cpf, PDO::PARAM_STR);
-            $smtm->bindValue(':diretoria', $user->diretoria, PDO::PARAM_STR);
+            $smtm->bindValue(':data', $falta->data, PDO::PARAM_STR);
+            $smtm->bindValue(':justificativa', $falta->justificativa, PDO::PARAM_STR);
+            $smtm->bindValue(':id', $falta->id, PDO::PARAM_INT);
 
-            if(isset($user->pass)) {
-                $pass_hash = password_hash($user->pass, PASSWORD_DEFAULT);
-                $smtm->bindValue(':pass', $pass_hash, PDO::PARAM_STR);
+            if(isset($falta->arquivo)) {
+                $smtm->bindValue(':arquivo', $falta->arquivo, PDO::PARAM_STR);
             }
-            
-            return $smtm->execute();
+
+           return $smtm->execute();
 
         }
 
         return false;
     }
 
-    public function delete($user_atual) {
+    public function delete($falta_atual) {
 
-        $sql = 'DELETE FROM atletas WHERE id=:id';
+        $sql = 'DELETE FROM faltas WHERE id=:id';
             
         $db = static::getConexaoBD();
             
         $smtm = $db->prepare($sql);
 
-        $smtm->bindValue(':id', $user_atual->id, PDO::PARAM_INT);
+        $smtm->bindValue(':id', $falta_atual->id, PDO::PARAM_INT);
             
         return $smtm->execute();
     }
