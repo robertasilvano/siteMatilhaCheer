@@ -18,9 +18,9 @@ class Atletas extends \Core\Controller {
     }
 
     public function faltasAction() {
-        $faltas = Falta::selectAllByIDAtleta();
+        $faltas = Falta::selectAllByIDAtleta($_SESSION['user_id']);
 
-        View::renderTemplate('Atletas/faltas.html', ['faltas' => $faltas, 'nome' => $_SESSION['user_nome']]);
+        View::renderTemplate('Atletas/faltas.html', ['faltas' => $faltas]);
     }
 
     public function novaFaltaAction() {
@@ -36,7 +36,7 @@ class Atletas extends \Core\Controller {
         }
 
         Flash::addMensagens('Erro ao inserir falta!');
-        $faltas = Falta::selectAllByIDAtleta();
+        $faltas = Falta::selectAllByIDAtleta($_SESSION['user_id']);
         View::renderTemplate('Atletas/faltas.html', ['falta' => $falta, 'faltas' => $faltas]);
     }
 

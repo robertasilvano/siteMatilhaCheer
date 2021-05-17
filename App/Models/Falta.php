@@ -79,14 +79,16 @@ class Falta extends \Core\Model {
     }
 
 
-    public static function selectAllByIDAtleta() {
-        $sql = 'SELECT * FROM faltas WHERE id_atleta=:id';
+    public static function selectAllByIDAtleta($id=NULL) {
+
+        if (isset($id)) $sql = 'SELECT faltas.id, atletas.nome, data, data_inserida, justificativa, arquivo FROM `faltas` LEFT JOIN atletas ON atletas.id = faltas.id_atleta WHERE id_atleta=:id ORDER BY data DESC';
+        else $sql = 'SELECT faltas.id, atletas.nome, data, data_inserida, justificativa, arquivo FROM `faltas` LEFT JOIN atletas ON atletas.id = faltas.id_atleta ORDER BY atletas.nome';
 
         $db = static::getConexaoBD();
 
         $smtm = $db->prepare($sql);
 
-        $smtm->bindValue(':id', $_SESSION['user_id'], PDO::PARAM_INT);
+        if (isset($id)) $smtm->bindValue(':id', $id, PDO::PARAM_INT);
         
         $smtm->setFetchMode(PDO::FETCH_CLASS, get_called_class());
 
@@ -95,6 +97,23 @@ class Falta extends \Core\Model {
         return $smtm->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function selectByNome($nome) {
+
+        $sql = "SELECT faltas.id, atletas.nome, data, data_inserida, justificativa, arquivo FROM `faltas` LEFT JOIN atletas ON atletas.id = faltas.id_atleta WHERE atletas.nome LIKE :nome ORDER BY data DESC";
+
+        $db = static::getConexaoBD();
+
+        $smtm = $db->prepare($sql);
+
+        $smtm->bindValue(':nome', '%' . $nome . '%', PDO::PARAM_STR);
+        
+        $smtm->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
+        $smtm->execute();
+
+        return $smtm->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
     public function insert() {
         
         $sql = 'INSERT INTO faltas (id_atleta, data, justificativa, arquivo) VALUES (:id_atleta, :data, :justificativa, :arquivo)';

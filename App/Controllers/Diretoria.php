@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\User;
+use App\Models\Falta;
 use App\Auth;
 use App\Flash;
 use \Core\View;
@@ -66,8 +67,6 @@ class Diretoria extends \Core\Controller {
 
         $user = Auth::getUserByID($id);
 
-        var_dump($user);
-
        if ($user->user == 'admin') {
             Flash::addMensagens('Não é possível deleter o admin!');
        }
@@ -79,6 +78,60 @@ class Diretoria extends \Core\Controller {
         }
         $this->redirecionar('/diretoria/cadastro');
    }
+
+   public function faltasAction() {
+        $faltas = Falta::selectAllByIDAtleta();
+
+        View::renderTemplate('Diretoria/faltas.html', ['faltas' => $faltas]);
+    }
+
+    public function pesquisaFaltaAction() {
+        $nome = $_POST['nome'];
+        $faltas = Falta::selectByNome($nome);
+
+        View::renderTemplate('Diretoria/faltas.html', ['faltas' => $faltas]);
+    }
+
+    public function updateFaltaAction() {
+        View::renderTemplate('Diretoria/update-falta.html', ['falta' => Auth::getFaltaByID()]);
+   }
+
+   public function alterarFaltaAction() {
+       
+    $id = Auth::getIDByURL();
+
+    $falta = new Falta($_POST);
+    $falta->id = $id;
+
+    $uploadOK = $falta->trataArquivo();
+
+    if ($uploadOK == 1) {
+        if ($falta->update($falta)) {
+            Flash::addMensagens('Alteração realizada com sucesso!');
+            $this->redirecionar('/diretoria/faltas');
+        }
+    }
+
+    $falta->deletaArquivo();
+    Flash::addMensagens('Erro ao fazer alteração!');
+    View::renderTemplate('Diretoria/update-falta.html', ['falta' => $falta]);
+    }
+
+    public function deleteFaltaAction() {
+       
+        $id = Auth::getIDByURL();
+    
+         $falta = Auth::getFaltaByID($id);
+    
+         if ($falta->delete($falta)) {
+            Flash::addMensagens('Delete realizado com sucesso!');
+         }
+         else {
+             Flash::addMensagens('Erro ao fazer alteração!');
+         }
+         $this->redirecionar('/diretoria/faltas');
+    }
+    
 }
 
 ?>

@@ -13,36 +13,24 @@ Matilha Cheer
     <div class="row">
 
         <div class="row justify-content-center">
-            <h2>Insira aqui a sua falta. 😥 </h2>
+            <h2>Se quiser pesquisar um nome específico. 😉 </h2>
         </div>
-        <br>
-        <br>
-        <br>
-
+        
         <div class="row">
             <div class="container-faltas">
-                <form method="post" action="/atletas/nova-falta" class="form-faltas" enctype="multipart/form-data">
+                <form method="post" action="/diretoria/pesquisa-falta" class="form-faltas" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="data" class="visually-hidden">Data</label>
-                        <input type="date" id="data" name="data" class="form-control" placeholder="Data" value="{{ falta.data }}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="justificativa" class="visually-hidden">Justificativa</label>
-                        <input type="text" id="justificativa" name="justificativa" class="form-control" placeholder="Justificativa" value="{{ falta.justificativa }}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="arquivo" class="visually-hidden">Arquivo</label>
-                        <input type="file" id="arquivo" name="arquivo" class="form-control" placeholder="arquivo">
-                    </div>
-    
+                        <label for="nome" class="visually-hidden">Nome</label>
+                        <input type="text" id="nome" name="nome" class="form-control" placeholder="Nome" required>
+                    </div> 
                     <br>
-                    <button class="w-100 btn btn-outline-warning" type="submit" name='faltar'>Faltar</button>
+                    <button class="w-100 btn btn-outline-warning" type="submit" name='faltar'>Pesquisar</button>
                 </form>
             </div>
         </div>
-            
-        <hr>
-            
+
+        <br>
+
         <div class="row">
             <div class="container-tabela">
                 <h1 class="h3 mb-3 fw-bold">Faltas cadastradas</h1>
@@ -64,15 +52,15 @@ Matilha Cheer
                             {% for falta in faltas %}
                                 <tr>
                                 {% for column in falta %}
-                                    {% if loop.index != 1 %}
+                                    {% if loop.index != 1%}
                                         <td>
                                         {{ column }}
                                         </td>
                                     {% endif %}
                                 {% endfor %}
                                 <td>
-                                    <a class='btn btn-outline-warning btn-sm' href='/atletas/update/{{falta.id}}'>Update</a>
-                                    <a class='btn btn-outline-warning btn-sm' href='/atletas/delete/{{falta.id}}' onclick="return confirm('Are you sure?');">Delete</a>
+                                    <a class='btn btn-outline-warning btn-sm' href='/diretoria/update-falta/{{falta.id}}'>Update</a>
+                                    <a class='btn btn-outline-warning btn-sm' href='/diretoria/delete-falta/{{falta.id}}' onclick="return confirm('Are you sure?');">Delete</a>
                                 </td>
                                 </tr>
                             {% endfor %}
@@ -82,7 +70,7 @@ Matilha Cheer
                     </table>
                     
                 {% else %}
-                    <br><div class='alert alert-warning'>Você não tem nenhuma falta cadastrada! 😍</div>
+                    <br><div class='alert alert-warning'> Nenhuma falta cadastrada! 😍</div>
                 {% endif %}
 
             </div>
