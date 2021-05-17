@@ -18,7 +18,9 @@ class Atletas extends \Core\Controller {
     }
 
     public function faltasAction() {
-        View::renderTemplate('Atletas/faltas.html');
+        $faltas = Falta::selectAllByUser();
+
+        View::renderTemplate('Atletas/faltas.html', ['faltas' => $faltas, 'nome' => $_SESSION['user_nome']]);
     }
 
     public function novaFaltaAction() {
@@ -28,7 +30,8 @@ class Atletas extends \Core\Controller {
         
         if ($uploadOK == 1) {
             if ($falta->insert()) {
-                $this->redirecionar('/atletas');
+                Flash::addMensagens('Falta inserida com sucesso!');
+                $this->redirecionar('/atletas/faltas');
             }
         }
         

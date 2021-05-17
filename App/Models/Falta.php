@@ -5,6 +5,7 @@ namespace App\Models;
 use PDO;
 use PDOException;
 use \App\Auth;
+use \App\Flash;
 
 class Falta extends \Core\Model {
 
@@ -27,32 +28,32 @@ class Falta extends \Core\Model {
             $check = getimagesize($_FILES["arquivo"]["tmp_name"]);
 
             if ($check !== false) {
-                echo "Arquivo recebido: " . $check["mime"] . '<br>';
+                Flash::addMensagens('Arquivo recebido: '. $check["mime"]);
                 $uploadOK = 1;
             }
             else {
-                echo "arquivo não encontrado!<br>";
+                Flash::addMensagens('Arquivo não encontrado!');
                 $uploadOK = 0;
             }
 
             if(file_exists($this->arquivo)) {
-                echo "Arquivo já existente na pasta do servidor. Mude o nome do arquivo e tente novamente!<br>";
+                Flash::addMensagens('Arquivo já existente na pasta do servidor. Mude o nome do arquivo e tente novamente!');
                 $uploadOK = 0;
             }
 
             if($_FILES["arquivo"]["size"] > 50000000) {
-                echo "Arquivo muito grande! Tente novamente. <br>";
+                Flash::addMensagens('Arquivo muito grande!');
                 $uploadOK = 0;
             }
 
             if ($uploadOK == 1) {
                 if(move_uploaded_file($_FILES["arquivo"]["tmp_name"], $this->arquivo)) {
-                    echo "Arquivo carregado com sucesso!";
+                    Flash::addMensagens('Arquivo carregado com sucesso!');
                     $uploadOK = 1;
 
                 }
                 else {
-                    echo "Erro ao mover o arquivo! Tente novamente.";
+                    Flash::addMensagens('Erro ao mover o arquivo! Tente novamente.');
                     $uploadOK = 0;
                 }
                 return $uploadOK;
@@ -65,22 +66,23 @@ class Falta extends \Core\Model {
         }
     }
 
-    public static function selectAll() {
-        try {
-            $db = static::getConexaoBD();
+    public static function selectAllByUser() {
+        $sql = 'SELECT * FROM faltas WHERE id_atleta=:id';
 
-            $stmt = $db->query('SELECT * FROM faltas');
-            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            
-            return $results;
-        }
-        catch (PDOException $e) {
-            echo $e->getMessage();
-        }
+        $db = static::getConexaoBD();
+
+        $smtm = $db->prepare($sql);
+
+        $smtm->bindValue(':id', $_SESSION['user_id'], PDO::PARAM_INT);
+        
+        $smtm->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
+        $smtm->execute();
+
+        return $smtm->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function insert() {
-
         
         $sql = 'INSERT INTO faltas (id_atleta, data, justificativa, arquivo) VALUES (:id_atleta, :data, :justificativa, :arquivo)';
         
@@ -93,7 +95,7 @@ class Falta extends \Core\Model {
         $smtm->bindValue(':justificativa', $this->justificativa, PDO::PARAM_STR);
         $smtm->bindValue(':arquivo', $this->arquivo, PDO::PARAM_STR);
 
-        $smtm->execute();
+        return $smtm->execute();
     }
     
     public static function findByUser($user) {
