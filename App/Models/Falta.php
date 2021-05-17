@@ -6,9 +6,7 @@ use PDO;
 use PDOException;
 use \App\Auth;
 
-class User extends \Core\Model {
-
-    public $errors = [];
+class Falta extends \Core\Model {
 
     public function __construct($data = []) {
         foreach ($data as $key => $value) {
@@ -16,11 +14,62 @@ class User extends \Core\Model {
         }
     }
 
+    public function trataArquivo() {
+
+        if ($_FILES["arquivo"]["tmp_name"]) {
+
+            $diretorio = "uploads/";
+            $this->arquivo = $diretorio . basename($_FILES["arquivo"]["name"]);
+            $uploadOK = 0;
+
+            $ext = strtolower(pathinfo($this->arquivo, PATHINFO_EXTENSION));
+
+            $check = getimagesize($_FILES["arquivo"]["tmp_name"]);
+
+            if ($check !== false) {
+                echo "Arquivo recebido: " . $check["mime"] . '<br>';
+                $uploadOK = 1;
+            }
+            else {
+                echo "arquivo não encontrado!<br>";
+                $uploadOK = 0;
+            }
+
+            if(file_exists($this->arquivo)) {
+                echo "Arquivo já existente na pasta do servidor. Mude o nome do arquivo e tente novamente!<br>";
+                $uploadOK = 0;
+            }
+
+            if($_FILES["arquivo"]["size"] > 50000000) {
+                echo "Arquivo muito grande! Tente novamente. <br>";
+                $uploadOK = 0;
+            }
+
+            if ($uploadOK == 1) {
+                if(move_uploaded_file($_FILES["arquivo"]["tmp_name"], $this->arquivo)) {
+                    echo "Arquivo carregado com sucesso!";
+                    $uploadOK = 1;
+
+                }
+                else {
+                    echo "Erro ao mover o arquivo! Tente novamente.";
+                    $uploadOK = 0;
+                }
+                return $uploadOK;
+            }
+        }
+        else {
+            $this->arquivo = 'NULL';
+            $uploadOK = 1;
+            return $uploadOK;
+        }
+    }
+
     public static function selectAll() {
         try {
             $db = static::getConexaoBD();
 
-            $stmt = $db->query('SELECT * FROM atletas');
+            $stmt = $db->query('SELECT * FROM faltas');
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
             
             return $results;
@@ -32,50 +81,19 @@ class User extends \Core\Model {
 
     public function insert() {
 
-        $this->validate();
-
         
-        if (empty($this->errors)) {
-            $pass_hash = password_hash($this->pass, PASSWORD_DEFAULT);
+        $sql = 'INSERT INTO faltas (id_atleta, data, justificativa, arquivo) VALUES (:id_atleta, :data, :justificativa, :arquivo)';
+        
+        $db = static::getConexaoBD();
+        
+        $smtm = $db->prepare($sql);
+        
+        $smtm->bindValue(':id_atleta', $_SESSION['user_id'], PDO::PARAM_STR);
+        $smtm->bindValue(':data', $this->data, PDO::PARAM_STR);
+        $smtm->bindValue(':justificativa', $this->justificativa, PDO::PARAM_STR);
+        $smtm->bindValue(':arquivo', $this->arquivo, PDO::PARAM_STR);
 
-            $sql = 'INSERT INTO atletas (nome, user, pass, nascimento, telefone, convenio, tipo_sangue, cpf, diretoria) VALUES (:nome, :user, :pass, :nascimento, :telefone, :convenio, :tipo_sangue, :cpf, :diretoria)';
-
-            $db = static::getConexaoBD();
-
-            $smtm = $db->prepare($sql);
-            
-            $smtm->bindValue(':nome', $this->nome, PDO::PARAM_STR);
-            $smtm->bindValue(':user', $this->user, PDO::PARAM_STR);
-            $smtm->bindValue(':pass', $pass_hash, PDO::PARAM_STR);
-            $smtm->bindValue(':nascimento', $this->nascimento, PDO::PARAM_STR);
-            $smtm->bindValue(':telefone', $this->telefone, PDO::PARAM_STR);
-            $smtm->bindValue(':convenio', $this->convenio, PDO::PARAM_STR);
-            $smtm->bindValue(':tipo_sangue', $this->tipo_sangue, PDO::PARAM_STR);
-            $smtm->bindValue(':cpf', $this->cpf, PDO::PARAM_STR);
-            $smtm->bindValue(':diretoria', $this->diretoria, PDO::PARAM_STR);
-
-            return $smtm->execute();
-
-        }
-
-        return false;
-    }
-
-    public function validate() {
-
-        //trata a diretoria
-        if (isset($this->diretoria)) {
-            $this->diretoria = 1;
-        }
-        else {
-            $this->diretoria = 0;
-        }
-
-        //trata user
-        if (static::findByUser($this->user) !== false) {
-            $this->errors[] = 'User já em uso';
-        }
-
+        $smtm->execute();
     }
     
     public static function findByUser($user) {

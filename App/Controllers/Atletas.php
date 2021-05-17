@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Models\User;
 use \Core\View;
+use App\Models\Falta;
+use App\Flash;
 
 class Atletas extends \Core\Controller {
 
@@ -20,19 +22,18 @@ class Atletas extends \Core\Controller {
     }
 
     public function novaFaltaAction() {
+        $falta = new Falta($_POST);
 
-        $this->trataArquivo();
-
-        $diretorio = "uploads/";
-        $arquivo = $diretorio . basename($_FILES["arquivo"]["name"]);
-        $uploadOK = 1;
-
-        $ext = strtolower(pathinfo($arquivo, PATHINFO_EXTENSION));
-
-        $check = getimagesize($_FILES["arquivo"]["tmp_name"]);
+        $uploadOK = $falta->trataArquivo();
         
+        if ($uploadOK == 1) {
+            if ($falta->insert()) {
+                $this->redirecionar('/atletas');
+            }
+        }
         
-        //$this->redirecionar('/atletas');
+
+        View::renderTemplate('Atletas/faltas.html', ['falta' => $falta]);
     }
 
 }
